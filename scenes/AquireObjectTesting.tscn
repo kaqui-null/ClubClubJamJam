@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://b4h1va3jpc6jn"]
+
+[ext_resource type="Script" uid="uid://darvi2pfnfp8n" path="res://scripts/aquirer.gd" id="1_moqkm"]
+[ext_resource type="Script" uid="uid://dhyxpiqejd15u" path="res://scripts/test_aquire.gd" id="2_n5m63"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bbxul"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_bbxul"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t23jj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t23jj"]
+radius = 0.50044477
+
+[node name="Node2D" type="Node2D" unique_id=2139902456]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=897115853]
+script = ExtResource("1_moqkm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=597325942]
+shape = SubResource("CircleShape2D_bbxul")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Area2D" unique_id=780878648]
+position = Vector2(-9.536743e-07, 1.9073486e-06)
+scale = Vector2(20.022678, 20.000004)
+mesh = SubResource("SphereMesh_bbxul")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=992919615]
+position = Vector2(470, 323)
+scale = Vector2(119.91, 119.91)
+mesh = SubResource("SphereMesh_t23jj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="MeshInstance2D" unique_id=517633538 groups=["aqo"]]
+script = ExtResource("2_n5m63")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeshInstance2D/StaticBody2D" unique_id=1735762654]
+shape = SubResource("CircleShape2D_t23jj")
