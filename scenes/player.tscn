@@ -22,6 +22,11 @@ size = Vector2(6, 6)
 
 [node name="Player" type="CharacterBody2D" unique_id=535378298]
 script = ExtResource("1_3vyb7")
+health = 50.0
+max_damage = 10.0
+max_charge_time = 2.0
+max_parry_time = 0.5
+hitbox_enabled_time = 0.5
 
 [node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=737277221]
 position = Vector2(0, 0.5)

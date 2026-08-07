@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var health: float
+
 @export var speed: float = 300.0
 @export var jump_velocity: float = -400.0
 
@@ -7,20 +9,22 @@ var movement_direction: Vector2 = Vector2.ZERO
 var facing_direction: Vector2 = Vector2.RIGHT
 
 var damage: float = 0.0
-@export var max_damage: float = 10.0
+@export var max_damage: float
 var charge_time: float = 0.0
-@export var max_charge_time: float = 2.0
-@export var hitbox_enabled_time: float = 0.5
+@export var max_charge_time: float
+@export var max_parry_time: float
+@export var hitbox_enabled_time: float
 
 var living: bool = true
 enum State {
 	IDLE,
 	CHARGING,
 	ATTACKING,
-	DEFENDING,
 	MOVING
 	}
 var state = State.IDLE
+
+signal got_parried(attacker)
 
 var _is_animation_flipped: bool = false # if false player is looking right
 
@@ -77,6 +81,15 @@ func hit(time_charging):
 	state = State.IDLE
 	$Hitbox.disabled = true
 	damage = min(max_damage, max_damage * (time_charging / max_charge_time))
+
+func hurt(entity_hurting, damage_dealt):
+	if charge_time <= max_parry_time:
+		parry(entity_hurting)
+	else:
+		health -= damage_dealt
+
+func parry(attacker):
+	got_parried.emit(attacker)
 
 func die():
 	if not living:
