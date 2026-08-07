@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cbwq30mumectu"]
 
-[ext_resource type="Script" uid="uid://c3akguaq7q320" path="res://Scripts/Enemies/EnemySpawner/enemy_spawner.gd" id="1_i5tn5"]
+[ext_resource type="Script" uid="uid://u8jktnjr3vrc" path="res://scripts/enemies/enemy_spawner/enemy_spawner.gd" id="1_wx05c"]
 
 [node name="EnemySpawner" type="Node2D" unique_id=47148587]
-script = ExtResource("1_i5tn5")
+script = ExtResource("1_wx05c")
 
 [node name="SpawnMarker" type="Marker2D" parent="." unique_id=651107826]
 
