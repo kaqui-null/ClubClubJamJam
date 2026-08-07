@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://c7kju3b4q8pp0"]
+
+[ext_resource type="Script" uid="uid://bli6ldttqdf02" path="res://scripts/crab_ai.gd" id="1_0s1mp"]
+[ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://icon.svg" id="2_jpe3k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8kryg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
+}],
+"loop": 1,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
+}],
+"loop": 0,
+"name": &"dying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
+}],
+"loop": 1,
+"name": &"moving",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
+}],
+"loop": 1,
+"name": &"stunned",
+"speed": 5.0
+}]
+
+[node name="Crab" type="CharacterBody2D" unique_id=1242124720]
+script = ExtResource("1_0s1mp")
+approach_range = 256.0
+attack_range = 80.0
+flee_range = 200.0
+speed = 200.0
+g_acceleration = 20.0
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=837789362]
+sprite_frames = SubResource("SpriteFrames_8kryg")
+animation = &"attacking"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=926523532]
+polygon = PackedVector2Array(64, -64, 64, 64, -64, 64, -64, -64)
+
+[node name="RayCastR" type="RayCast2D" parent="." unique_id=2122107906]
+target_position = Vector2(64, 0)
+collide_with_areas = true
+
+[node name="RayCastL" type="RayCast2D" parent="." unique_id=1377471930]
+target_position = Vector2(-64, 0)
+collide_with_areas = true
