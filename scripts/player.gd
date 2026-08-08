@@ -34,13 +34,19 @@ func _physics_process(delta: float) -> void:
 #------------------------------------------------
 
 func _unhandled_input(event):
-	if event.is_action_pressed("Attack"):
+	var defending: bool = event.is_action_pressed("Defend")
+	var readying: bool = event.is_action_pressed("Attack")
+	var releasing: bool = event.is_action_released("Attack")
+
+	if readying and not defending:
 		state = State.CHARGING
 		charge_time = 0.0
 		print("Is charging..")
-	elif event.is_action_released("Attack"):
+	elif releasing:
 		hit()
 		print(charge_time)
+	elif defending:
+		state = State.PARRYING
 
 func movement(delta: float) -> void:
 	var direction: float;
@@ -92,6 +98,7 @@ func hit() -> void:
 
 func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
 	if state == State.PARRYING:
+		print("parrying")
 		parry(entity_hurting)
 	else:
 		health -= damage_dealt

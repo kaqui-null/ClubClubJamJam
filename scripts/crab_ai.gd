@@ -32,8 +32,8 @@ func _physics_process(delta: float) -> void:
 	for raycast: RayCast2D in [$RayCastL, $RayCastR]:
 		if raycast.get_collider() and raycast.get_collider().name == &"Player":
 			Player = raycast.get_collider();
-			#if !Player.got_parried.is_connected(parried):
-				#Player.got_parried.connect(parried)
+			if !Player.got_parried.is_connected(parried):
+				Player.got_parried.connect(parried)
 
 	match state:
 		IDLE:
@@ -67,6 +67,10 @@ func animate_from_state(_state: int) -> void:
 			$Sprite.animation = &"dying"
 			$Sprite.modulate = Color.DIM_GRAY
 			#NOTICE make timer length depend on amount of frames here too
+		PARRIED:
+			#TODO reverse attack animation and play it or use a non-smear version of attack
+			$Sprite.modulate = Color.BROWN
+			$AttackTimer.start()
 
 func idle(delta: float) -> void:
 	if Player:
@@ -121,3 +125,5 @@ func _on_attack_timer_timeout():
 	if state == ATTACKING:
 		hit()
 		$AttackTimer.start()
+	elif state == PARRIED:
+		state = ATTACKING
