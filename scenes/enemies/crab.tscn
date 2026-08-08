@@ -8,10 +8,19 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_jpe3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jpe3k")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attacking",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -46,20 +55,29 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Crab" type="CharacterBody2D" unique_id=1242124720]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kryg"]
+size = Vector2(270.4905, 150.92603)
+
+[node name="Crab" type="CharacterBody2D" unique_id=1242124720 groups=["enemy"]]
 script = ExtResource("1_0s1mp")
-approach_range = 256.0
-attack_range = 80.0
-flee_range = 200.0
-speed = 200.0
+approach_range = 75.0
+attack_range = 40.0
+flee_range = 90.0
+speed = 50.0
+damage = 50.0
+pipe_damage = 5.0
 g_acceleration = 20.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=837789362]
+position = Vector2(0, 1.1920929e-07)
+scale = Vector2(0.21875, 0.28125)
 sprite_frames = SubResource("SpriteFrames_8kryg")
 animation = &"attacking"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=926523532]
-polygon = PackedVector2Array(64, -64, 64, 64, -64, 64, -64, -64)
+[node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=1084093270]
+position = Vector2(0, -4.7683716e-07)
+scale = Vector2(0.10351565, 0.23852745)
+shape = SubResource("RectangleShape2D_8kryg")
 
 [node name="RayCastR" type="RayCast2D" parent="." unique_id=2122107906]
 target_position = Vector2(64, 0)
@@ -68,3 +86,8 @@ collide_with_areas = true
 [node name="RayCastL" type="RayCast2D" parent="." unique_id=1377471930]
 target_position = Vector2(-64, 0)
 collide_with_areas = true
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=133257281]
+one_shot = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

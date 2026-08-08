@@ -17,7 +17,7 @@ extends Node2D
 
 func _ready() -> void:
 	timer.wait_time = spawn_timer_offset
-	
+
 	if spawn_on_start:
 		_spawn_enemy()
 		timer.start()
@@ -26,11 +26,12 @@ func _ready() -> void:
 func _spawn_enemy() -> void:
 	if number_of_enemies > 0:
 		number_of_enemies -= 1
+		var enemy_node = enemy.instantiate()
+		enemy_node.global_position = self.global_position
+		get_tree().root.add_child.call_deferred(enemy_node)
+
 	else:
 		_disappear()
-	
-	var enemy_node = enemy.instantiate()
-	get_tree().root.add_child.call_deferred(enemy_node)
 
 ## Destroys Spawner
 func _disappear() -> void:

@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://0c43v0vs6n61"]
 
 [ext_resource type="Script" uid="uid://du3oy60frg5te" path="res://scripts/player.gd" id="1_3vyb7"]
-[ext_resource type="Texture2D" uid="uid://dh5dn2dyjogy0" path="res://assets/testing_assets/player_test.png" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://icon.svg" id="2_g2els"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvuye"]
-size = Vector2(10, 13)
+size = Vector2(24, 34.22021)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pvuye"]
 animations = [{
@@ -18,26 +18,31 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_84e27"]
-size = Vector2(6, 6)
+size = Vector2(7, 10)
 
 [node name="Player" type="CharacterBody2D" unique_id=535378298]
 script = ExtResource("1_3vyb7")
-health = 50.0
-max_damage = 10.0
+speed = 50.0
 max_charge_time = 2.0
-max_parry_time = 0.5
-hitbox_enabled_time = 0.5
 
 [node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=737277221]
-position = Vector2(0, 0.5)
+position = Vector2(0, -4.7683716e-07)
 scale = Vector2(1, 0.99356496)
 shape = SubResource("RectangleShape2D_pvuye")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=24304928]
+position = Vector2(4.7683716e-07, 2.3841858e-07)
+scale = Vector2(0.1875, 0.26562503)
 sprite_frames = SubResource("SpriteFrames_pvuye")
 
-[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=436252978]
-position = Vector2(9, 0)
+[node name="Weapon" type="Area2D" parent="." unique_id=202659880]
+collision_layer = 2
+
+[node name="Hitbox" type="CollisionShape2D" parent="Weapon" unique_id=436252978]
+position = Vector2(18, -1)
 shape = SubResource("RectangleShape2D_84e27")
-disabled = true
 debug_color = Color(0.9667291, 0.17503422, 0.14910981, 0.41960785)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=464109253]
+offset = Vector2(0, -50)
+position_smoothing_enabled = true
