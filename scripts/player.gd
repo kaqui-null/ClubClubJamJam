@@ -10,52 +10,61 @@ var facing_direction: Vector2 = Vector2.RIGHT
 
 var damage_multiplier: float = 0.0
 var charge_time: float = 0.0
-@export var max_charge_time: float
-@export var max_parry_time: float
+@export var max_charge_time: float;
 
-var living: bool = true
 enum State {
 	IDLE,
 	CHARGING,
 	ATTACKING,
+	PARRYING,
 	MOVING
 	}
-var state = State.IDLE
+var state: State = State.IDLE
 
 signal got_parried(attacker)
 
 var _is_animation_flipped: bool = false # if false player is looking right
 
 func _physics_process(delta: float) -> void:
+	movement(delta)
+
+	if state == State.CHARGING:
+		charge_time = move_toward(charge_time, max_charge_time, delta)
+
+#------------------------------------------------
+
+func _unhandled_input(event):
+	if event.is_action_pressed("Attack"):
+		state = State.CHARGING
+		charge_time = 0.0
+		print("Is charging..")
+	elif event.is_action_released("Attack"):
+		hit()
+		print(charge_time)
+
+func movement(delta: float) -> void:
+	var direction: float;
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
 		velocity.y = jump_velocity
 
-	var direction := Input.get_axis("Left", "Right")
+	direction = Input.get_axis("Left", "Right")
 	if direction:
 		state = State.MOVING
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
-	if state == State.CHARGING:
-		charge_time += delta
-
 	face_mouse_direction()
 	move_and_slide()
 
-func _unhandled_input(event):
-	if event.is_action_pressed("Attack"):
-		state = State.CHARGING
-		charge_time = 0.0
-	elif event.is_action_released("Attack"):
-		hit(charge_time)
+func face_mouse_direction() -> void:
+	var mouse_position: Vector2;
 
-func face_mouse_direction():
-	var mouse_position = get_viewport().get_mouse_position()
-
+	mouse_position = get_viewport().get_mouse_position()
 	if (mouse_position.x - position.x > 0):
 		facing_direction = Vector2.RIGHT
 		if _is_animation_flipped:
@@ -69,28 +78,25 @@ func face_mouse_direction():
 			_is_animation_flipped = true
 			$Weapon/Hitbox.position *= -1
 
-func hit(time_charging: float):
+func hit() -> void:
 	var bodies_in_hitbox: Array[Node2D];
 
 	state = State.ATTACKING
-	damage_multiplier = (time_charging / max_charge_time)
+	damage_multiplier = (charge_time / max_charge_time)
 	bodies_in_hitbox = $Weapon.get_overlapping_bodies()
+	print(bodies_in_hitbox)
 	for body in bodies_in_hitbox:
 		if body.is_in_group(&"enemy"):
-			body.get_script().hurt(damage_multiplier)
+			body.hurt(damage_multiplier)
 	state = State.IDLE
 
-
-func hurt(entity_hurting: Node2D, damage_dealt: float):
-	if charge_time <= max_parry_time:
+func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
+	if state == State.PARRYING:
 		parry(entity_hurting)
 	else:
 		health -= damage_dealt
-	print(health)
+		if health <= 0:
+			queue_free()
 
-func parry(attacker: Node2D):
+func parry(attacker: Node2D) -> void:
 	got_parried.emit(attacker)
-
-func die():
-	if not living:
-		queue_free()

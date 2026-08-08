@@ -24,7 +24,6 @@ size = Vector2(7, 10)
 script = ExtResource("1_3vyb7")
 speed = 50.0
 max_charge_time = 2.0
-max_parry_time = 0.5
 
 [node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=737277221]
 position = Vector2(0, -4.7683716e-07)
@@ -37,11 +36,11 @@ scale = Vector2(0.1875, 0.26562503)
 sprite_frames = SubResource("SpriteFrames_pvuye")
 
 [node name="Weapon" type="Area2D" parent="." unique_id=202659880]
+collision_layer = 2
 
 [node name="Hitbox" type="CollisionShape2D" parent="Weapon" unique_id=436252978]
 position = Vector2(18, -1)
 shape = SubResource("RectangleShape2D_84e27")
-disabled = true
 debug_color = Color(0.9667291, 0.17503422, 0.14910981, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=464109253]

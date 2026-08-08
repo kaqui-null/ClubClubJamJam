@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://tq6ujgkifa50"]
 
-[ext_resource type="PackedScene" uid="uid://cbwq30mumectu" path="res://scenes/enemies/enemy_spawner/enemy_spawner.tscn" id="1_6bky5"]
-[ext_resource type="PackedScene" uid="uid://c7kju3b4q8pp0" path="res://scenes/enemies/crab.tscn" id="2_hu6fl"]
-[ext_resource type="PackedScene" uid="uid://0c43v0vs6n61" path="res://scenes/player.tscn" id="3_hu6fl"]
+[ext_resource type="PackedScene" uid="uid://cbwq30mumectu" path="res://scenes/enemies/enemy_spawner/enemy_spawner.tscn" id="1_jqbo6"]
+[ext_resource type="PackedScene" uid="uid://c7kju3b4q8pp0" path="res://scenes/enemies/crab.tscn" id="2_0j4cp"]
+[ext_resource type="PackedScene" uid="uid://0c43v0vs6n61" path="res://scenes/player.tscn" id="3_qdqsw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8kryg"]
 size = Vector2(240, 18)
@@ -22,9 +22,9 @@ position = Vector2(120, 151)
 scale = Vector2(239.99998, 17.999998)
 texture = SubResource("PlaceholderTexture2D_8kryg")
 
-[node name="EnemySpawner" parent="." unique_id=47148587 instance=ExtResource("1_6bky5")]
+[node name="EnemySpawner" parent="." unique_id=47148587 instance=ExtResource("1_jqbo6")]
 position = Vector2(156, 118)
-enemy = ExtResource("2_hu6fl")
+enemy = ExtResource("2_0j4cp")
 
-[node name="Player" parent="." unique_id=535378298 instance=ExtResource("3_hu6fl")]
+[node name="Player" parent="." unique_id=535378298 instance=ExtResource("3_qdqsw")]
 position = Vector2(59, 113)

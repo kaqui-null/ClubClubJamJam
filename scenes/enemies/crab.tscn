@@ -64,6 +64,8 @@ approach_range = 75.0
 attack_range = 40.0
 flee_range = 90.0
 speed = 50.0
+damage = 50.0
+pipe_damage = 5.0
 g_acceleration = 20.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=837789362]

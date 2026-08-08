@@ -21,6 +21,7 @@ var dir: int;
 
 func _ready() -> void:
 	Room = self.get_parent()
+	Timer.new()
 	$RayCastR.target_position = Vector2(approach_range, 0)
 	$RayCastL.target_position = Vector2(-approach_range, 0)
 	change_state(IDLE)
@@ -58,15 +59,14 @@ func animate_from_state(_state: int) -> void:
 		ATTACKING:
 			$Sprite.animation = &"attacking"
 			$Sprite.modulate = Color.CRIMSON
-			$AttackTimer.start()
+			$AttackTimer.start() #TODO make timer length depend on amount of frames
 		FOLLOWING, FLEEING:
 			$Sprite.animation = &"moving"
 			$Sprite.modulate = Color.BLUE
 		DEAD:
 			$Sprite.animation = &"dying"
 			$Sprite.modulate = Color.DIM_GRAY
-			await $Sprite.animation_finished
-			queue_free()
+			#NOTICE make timer length depend on amount of frames here too
 
 func idle(delta: float) -> void:
 	if Player:
@@ -81,7 +81,6 @@ func idle(delta: float) -> void:
 			self.velocity.y += g_acceleration * delta
 		else:
 			self.velocity.y = 0
-
 
 func following(delta: float) -> void:
 	if Player:
@@ -105,13 +104,11 @@ func attacking(delta: float) -> void:
 	elif !Player:
 		state = IDLE
 
-
-
-
 func hurt(multiplier: float):
 	health -= pipe_damage * multiplier
 	if health <= 0:
 		change_state(DEAD)
+	print(health)
 
 func hit() -> void:
 	Player.hurt(self, damage)
@@ -122,6 +119,5 @@ func parried(attacker: Node2D) -> void:
 
 func _on_attack_timer_timeout():
 	if state == ATTACKING:
-		print("hit!")
 		hit()
 		$AttackTimer.start()
