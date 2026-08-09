@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://l02a5uch4on3"]
+
+[ext_resource type="Texture2D" uid="uid://bvrom0loxmicv" path="res://assets/buttons/Exit_Button_Pressed.webp" id="1_60mby"]
+[ext_resource type="Script" uid="uid://byh45sxkml6be" path="res://scripts/menus/options_menu.gd" id="1_ohqpn"]
+[ext_resource type="Texture2D" uid="uid://dibuuqtoiwev4" path="res://assets/buttons/Exit_Button.webp" id="2_ohqpn"]
+
+[node name="OptionsMenu" type="Control" unique_id=2030490126]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ohqpn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1418909162]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 160.0
+offset_bottom = 53.33333
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=935896327]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=407957486]
+layout_mode = 2
+text = "Music"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HBoxContainer" unique_id=1158496224]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="ExitButton" type="TextureButton" parent="VBoxContainer" unique_id=1454154749]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("1_60mby")
+texture_pressed = ExtResource("2_ohqpn")
+
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="exit_button_pressed"]
