@@ -4,6 +4,7 @@ var health: float = 100
 
 @export var speed: float = 300.0
 @export var jump_velocity: float = -400.0
+@export var climb_velocity: float = -100.0
 
 var movement_direction: Vector2 = Vector2.ZERO
 var facing_direction: Vector2 = Vector2.RIGHT
@@ -17,8 +18,10 @@ enum State {
 	CHARGING,
 	ATTACKING,
 	PARRYING,
-	MOVING
-	}
+	MOVING,
+	CLIMBING
+}
+
 var state: State = State.IDLE
 
 signal got_parried(attacker)
@@ -27,6 +30,7 @@ var _is_animation_flipped: bool = false # if false player is looking right
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
+	print(state)
 
 	if state == State.CHARGING:
 		charge_time = move_toward(charge_time, max_charge_time, delta)
@@ -51,7 +55,7 @@ func _unhandled_input(event):
 func movement(delta: float) -> void:
 	var direction: float;
 
-	if not is_on_floor():
+	if not is_on_floor() && state != State.CLIMBING:
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
@@ -63,6 +67,13 @@ func movement(delta: float) -> void:
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
+
+	if Input.is_action_pressed("ClimbUp"):
+		if is_climbable():
+			state = State.CLIMBING
+
+	if state == State.CLIMBING:
+		climb()
 
 	face_mouse_direction()
 	move_and_slide()
@@ -107,3 +118,23 @@ func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
 
 func parry(attacker: Node2D) -> void:
 	got_parried.emit(attacker)
+
+func is_climbable() -> bool:
+	for area in $InteractionArea.get_overlapping_areas():
+		if area.is_in_group("ladder"):
+			return true
+	
+	return false
+
+func climb() -> void:
+	if not is_climbable():
+		state = State.IDLE
+		velocity.y = 0
+		return
+	
+	if Input.is_action_pressed("ClimbUp"):
+		velocity.y = climb_velocity
+	elif Input.is_action_pressed("ClimbDown"):
+		velocity.y = -climb_velocity
+	else:
+		velocity.y = 0
