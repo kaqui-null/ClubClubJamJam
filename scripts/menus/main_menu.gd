@@ -1,7 +1,7 @@
-extends Node
+extends Control
 
 var packed_start: PackedScene
-var packed_options: PackedScene
+var packed_options: PackedScene = load("res://scenes/menus/options_menu.tscn")
 
 func start_button_pressed() -> void:
 	if (not packed_start == null):
