@@ -4,6 +4,8 @@ extends TileMapLayer
 @export var dbg : bool = !false
 
 func _ready():
+	var k = [[0]]
+	
 	# start_dim is the width and height in the ..0 direction
 	var start_width: int = 0
 	var start_height: int = 0
@@ -45,25 +47,32 @@ func _ready():
 				repr[idx] = "!"+str(cell_pos.x)+", " + repr[idx] 
 			if dbg : print("x<start, pushing left "+str(start_width))
 		
-		var updated = repr[cell_pos.y-start_height].replace("!"+str(cell_pos.x),str(id_from_coords(get_cell_atlas_coords(cell_pos))))
+		var updated = repr[cell_pos.y-start_height]#.replace("!"+str(cell_pos.x),str(id_from_coords(get_cell_atlas_coords(cell_pos))))
 		repr[cell_pos.y-start_height] = updated
 		if dbg : print(updated)
+	print(repr)
 	
 	var file = FileAccess.open("res://assets/world_layout.lyt.txt", FileAccess.WRITE)
 	file.store_string(
 		"s"+str(start.x)+":"+str(start.y)+
+		", o"+str(start.x-start_width-1)+":"+str(start.y-start_height-1)+
 		", w"+str(abs(start_width)+abs(end_width)+1)+
+		", t"+str(start_height)+
+		", l"+str(start_width)+
 		", \n"
 	)
 	for rep in repr :
 		if dbg : print(rep)
 		var proccessable : PackedStringArray = rep.split(", ")
 		var temp : String = ""
+		var deb : String = ""
 		var count : int = 0
-		for to_proc_idx : int in range(0, proccessable.size()-1) :
-			var last : bool = to_proc_idx == proccessable.size()-2
+		for to_proc_idx : int in range(0, proccessable.size()) :
+			var last : bool = to_proc_idx == proccessable.size()-1
 			var to_proc : int = dexclaim(proccessable[to_proc_idx])
 			var next_proc : int = dexclaim(proccessable[to_proc_idx+(0 if last else 1)])
+			
+			deb+= "_" if to_proc == 0 else "@"
 			
 			count+=1
 			if last or to_proc != next_proc :
@@ -72,6 +81,7 @@ func _ready():
 				else : temp+=str(to_proc)+", "
 				count = 0
 		if dbg : print(temp)
+		print(deb)
 		file.store_string(temp+"\n")
 	file.close()
 
@@ -88,3 +98,51 @@ func sum(i: int) -> int :
 	for j in range(0, i+1) :
 		temp+=j
 	return temp
+
+#11=a
+#10=b
+#3=c
+#16=d
+#15=e
+#4=f
+#g=0
+
+#s3:3, o4:4, w4, t-2, l-2, 
+#aabc_ 
+#dd_e_ 
+#d__e_ 
+#fbbg_ 
+
+#6=a
+#10=b
+#47=c
+#15=d
+#36=e
+#11=f
+#29=g
+#3=h
+#47=i
+#7=j
+#56=k
+#38=l
+#37=m
+#36=n
+#4=o
+#68=p
+#28=q
+#21=r
+#30=s
+#1=t
+#2=u
+#46=v
+
+#s3:3, o6:5, w9, t-2, l-3, 
+#___abb 
+#__ac__ 
+#__de_____ 
+#_fghij___ 
+#_dfkblbbj 
+#fmnopbqrs 
+#dobbbbjtu 
+#___obbvbb 
+#______oq_
