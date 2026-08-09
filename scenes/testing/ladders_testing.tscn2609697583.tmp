@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dwunwrwjan5pq"]
+
+[ext_resource type="PackedScene" uid="uid://0c43v0vs6n61" path="res://scenes/player.tscn" id="1_bix2g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfe6u"]
+size = Vector2(303, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4htj"]
+size = Vector2(20, 118)
+
+[node name="LaddersTesting" type="Node2D" unique_id=1701653440]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1507764305]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=900141529]
+position = Vector2(135.5, 156)
+shape = SubResource("RectangleShape2D_nfe6u")
+
+[node name="Player" parent="." unique_id=535378298 instance=ExtResource("1_bix2g")]
+position = Vector2(51, 103)
+jump_velocity = null
+climb_velocity = null
+
+[node name="Area2D" type="Area2D" parent="." unique_id=397703096 groups=["ladder"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2068625778]
+position = Vector2(130, 65)
+shape = SubResource("RectangleShape2D_r4htj")
