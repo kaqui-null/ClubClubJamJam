@@ -1,30 +1,23 @@
-[gd_scene format=3 uid="uid://tq6ujgkifa50"]
+[gd_scene format=4 uid="uid://tq6ujgkifa50"]
 
-[ext_resource type="PackedScene" uid="uid://cbwq30mumectu" path="res://scenes/enemies/enemy_spawner/enemy_spawner.tscn" id="1_jqbo6"]
-[ext_resource type="PackedScene" uid="uid://c7kju3b4q8pp0" path="res://scenes/enemies/crab.tscn" id="2_0j4cp"]
-[ext_resource type="PackedScene" uid="uid://0c43v0vs6n61" path="res://scenes/player.tscn" id="3_qdqsw"]
+[ext_resource type="TileSet" uid="uid://b4p3wmiw0sxm0" path="res://assets/tilesets/sub_back_tileset.tres" id="1_p2xcj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8kryg"]
-size = Vector2(240, 18)
+[node name="Room0" type="Node2D" unique_id=1838254503]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8kryg"]
+[node name="Foreground" type="TileMapLayer" parent="." unique_id=719194660]
+tile_map_data = PackedByteArray("AAAKAAAAAAACAAQAAAAAAAAAAAAEAAQAAAAAAAEAAAALAAQAAAALAAAAAAAFAAQAAAALAAEAAAAKAAQAAAAAAAUAAAAAAAQAAAABAAAAAAACAAQAAAABAAUAAAAAAAQAAAACAAAAAAACAAQAAAACAAUAAAAAAAQAAAADAAAAAAACAAQAAAADAAUAAAAAAAQAAAAEAAAAAAACAAQAAAAEAAUAAAAAAAQAAAAFAAAAAAACAAQAAAAFAAUAAAAAAAQAAAAGAAAAAAACAAQAAAAGAAUAAAAAAAQAAAAHAAAAAAACAAQAAAAHAAUAAAAAAAQAAAAIAAAAAAACAAQAAAAIAAUAAAAAAAQAAAAJAAAAAAACAAQAAAAJAAUAAAAAAAQAAAAKAAUAAAAAAAQAAAALAAUAAAAAAAQAAAA=")
+tile_set = ExtResource("1_p2xcj")
 
-[node name="Room1" type="Node2D" unique_id=1838254503]
+[node name="Background" type="TileMapLayer" parent="." unique_id=235842397]
+tile_map_data = PackedByteArray("AAABAAEAAAAOAAMAAAABAAIAAAAOAAMAAAABAAMAAAAOAAMAAAABAAQAAAAOAAMAAAACAAEAAAAOAAMAAAACAAIAAAAOAAMAAAACAAMAAAAOAAMAAAACAAQAAAAOAAMAAAADAAEAAAAOAAMAAAADAAIAAAAOAAMAAAADAAMAAAAOAAMAAAADAAQAAAAOAAMAAAAEAAEAAAAPAAMAAAAEAAIAAAAPAAMAAAAEAAMAAAAPAAMAAAAEAAQAAAAPAAMAAAAFAAEAAAAPAAIAAAAFAAIAAAAPAAIAAAAFAAMAAAAPAAIAAAAFAAQAAAAPAAIAAAAGAAEAAAAOAAMAAAAGAAIAAAAOAAMAAAAGAAMAAAAOAAMAAAAGAAQAAAAOAAMAAAAHAAEAAAAPAAIAAAAHAAIAAAAPAAIAAAAHAAMAAAAPAAIAAAAHAAQAAAAPAAIAAAAIAAEAAAAOAAMAAAAIAAIAAAAMAAMAAAAIAAMAAAAOAAMAAAAIAAQAAAAOAAMAAAAJAAEAAAAOAAMAAAAJAAIAAAAOAAMAAAAJAAMAAAAOAAMAAAAJAAQAAAAOAAMAAAAKAAEAAAAOAAMAAAAKAAIAAAAOAAMAAAAKAAMAAAAOAAMAAAAKAAQAAAAOAAMAAAAAAAIAAAAPAAIAAAAAAAMAAAAPAAIAAAAAAAQAAAAPAAIAAAALAAIAAAAPAAMAAAALAAMAAAAPAAMAAAALAAQAAAAPAAMAAAA=")
+tile_set = ExtResource("1_p2xcj")
+collision_enabled = false
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1660206755]
+[node name="Pipes" type="TileMapLayer" parent="." unique_id=468623081]
+tile_map_data = PackedByteArray("AAABAAIAAAAEAAAAAAABAAMAAAACAAAAAAABAAQAAAACAAAAAAACAAEAAAACAAAAAAACAAIAAAAAAAAAAAAGAAQAAAAFAAIAAAAHAAQAAAACAAIAAAAIAAQAAAALAAIAAAAJAAQAAAAOAAIAAAAKAAQAAAAEAAIAAAA=")
+tile_set = ExtResource("1_p2xcj")
+collision_enabled = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=841090178]
-position = Vector2(120, 151)
-shape = SubResource("RectangleShape2D_8kryg")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=651250414]
-position = Vector2(120, 151)
-scale = Vector2(239.99998, 17.999998)
-texture = SubResource("PlaceholderTexture2D_8kryg")
-
-[node name="EnemySpawner" parent="." unique_id=47148587 instance=ExtResource("1_jqbo6")]
-position = Vector2(156, 118)
-enemy = ExtResource("2_0j4cp")
-
-[node name="Player" parent="." unique_id=535378298 instance=ExtResource("3_qdqsw")]
-position = Vector2(59, 113)
+[node name="Decorations" type="TileMapLayer" parent="." unique_id=149273991]
+tile_map_data = PackedByteArray("AAABAAMAAAACAAMAAAA=")
+tile_set = ExtResource("1_p2xcj")
