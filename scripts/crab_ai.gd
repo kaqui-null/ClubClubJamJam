@@ -74,7 +74,6 @@ func animate_from_state(_state: int) -> void:
 
 func idle(delta: float) -> void:
 	if Player:
-		print(absf(Player.global_position.x - self.global_position.x))
 		if absf(Player.global_position.x - self.global_position.x) > attack_range:
 			change_state(FOLLOWING)
 		else:
