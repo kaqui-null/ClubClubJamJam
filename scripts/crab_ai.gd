@@ -20,6 +20,7 @@ var dir: int;
 @export var g_acceleration: float;
 
 func _ready() -> void:
+	$AttackTimer.wait_time = 9/8 #time for animation to finish
 	Room = self.get_parent()
 	Timer.new()
 	$RayCastR.target_position = Vector2(approach_range, 0)
@@ -55,21 +56,18 @@ func animate_from_state(_state: int) -> void:
 	match _state:
 		IDLE:
 			$Sprite.animation = &"idle"
-			$Sprite.modulate = Color.GREEN_YELLOW
 		ATTACKING:
 			$Sprite.animation = &"attacking"
-			$Sprite.modulate = Color.CRIMSON
 			$AttackTimer.start() #TODO make timer length depend on amount of frames
 		FOLLOWING, FLEEING:
 			$Sprite.animation = &"moving"
-			$Sprite.modulate = Color.BLUE
 		DEAD:
 			$Sprite.animation = &"dying"
-			$Sprite.modulate = Color.DIM_GRAY
+
 			#NOTICE make timer length depend on amount of frames here too
 		PARRIED:
 			#TODO reverse attack animation and play it or use a non-smear version of attack
-			$Sprite.modulate = Color.BROWN
+			$Sprite.animation = &"stunned"
 			$AttackTimer.start()
 
 func idle(delta: float) -> void:
@@ -126,3 +124,10 @@ func _on_attack_timer_timeout():
 		$AttackTimer.start()
 	elif state == PARRIED:
 		state = ATTACKING
+
+func _on_sprite_animation_finished():
+	$Sprite.animation = &"idle"
+	if state == PARRIED:
+		state = ATTACKING
+	elif state == DEAD:
+		self.queue_free()

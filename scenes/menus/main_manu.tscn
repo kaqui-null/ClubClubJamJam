@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlwvlm0sufxhh"]
 
 [ext_resource type="Script" uid="uid://dnwg1m2atlvq1" path="res://scripts/menus/main_menu.gd" id="1_6bes2"]
-[ext_resource type="PackedScene" uid="uid://b4gp5xcbq2cs4" path="res://scenes/rooms/room1.tscn" id="2_6bes2"]
+[ext_resource type="PackedScene" uid="uid://cyg5ppkyoi0fg" path="res://scenes/World.tscn" id="2_6bes2"]
 [ext_resource type="Texture2D" uid="uid://cbhys3342g8g2" path="res://assets/UI/menu-background.png" id="2_u6sas"]
 [ext_resource type="Texture2D" uid="uid://cvr1jfprl7cq7" path="res://assets/UI/play-button.png" id="3_6bes2"]
 [ext_resource type="Texture2D" uid="uid://b4ev24c7gpohp" path="res://assets/UI/play-button-pressed.png" id="4_kbml0"]
@@ -51,6 +51,8 @@ texture_pressed = ExtResource("4_kbml0")
 layout_mode = 2
 texture_normal = ExtResource("5_8i0my")
 texture_pressed = ExtResource("6_yvxhh")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1056982389]
 
 [connection signal="pressed" from="ButtonsContainer/StartButton" to="." method="start_button_pressed"]
 [connection signal="pressed" from="ButtonsContainer/ExitButton" to="." method="exit_button_pressed"]
