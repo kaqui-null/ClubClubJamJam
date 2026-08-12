@@ -30,55 +30,55 @@ signal got_parried(attacker)
 var _is_animation_flipped: bool = false # if false player is looking right
 
 func _physics_process(delta: float) -> void:
-	if state not in [State.ATTACKING, State.CHARGING, State.DYING]:
-		movement(delta)
+	var defending: bool = Input.is_action_just_pressed("Defend") # parry
+	var charging: bool = Input.is_action_just_pressed("Attack") # charge
+	var releasing: bool = Input.is_action_just_released("Attack") # whack
+	
+	if defending or charging or releasing :
+		print("defending: "+str(defending)+" charging: "+str(charging)+" releasing: "+str(releasing))
 
-	if state == State.CHARGING:
-		charge_time = move_toward(charge_time, max_charge_time, delta)
-
-#------------------------------------------------
-
-func _unhandled_input(event):
-	var defending: bool = event.is_action_pressed("Defend")
-	var readying: bool = event.is_action_pressed("Attack")
-	var releasing: bool = event.is_action_released("Attack")
-
-	if readying and not defending and state != State.CHARGING:
+	if charging and not defending and state != State.CHARGING:
 		state = State.CHARGING
-		charge_time = 0.0
 		$AnimatedSprite2D.animation = &"charging"
 	elif releasing and state != State.ATTACKING:
 		state = State.ATTACKING
 		$AnimatedSprite2D.animation = &"attack"
 	elif defending and state != State.PARRYING:
-		if state != State.PARRYING:
-			state = State.PARRYING
-			$AnimatedSprite2D.animation = &"parry"
+		state = State.PARRYING
+		$AnimatedSprite2D.animation = &"parry"
 
-func movement(delta: float) -> void:
-	var direction: float;
+	if state not in [State.DYING, State.ATTACKING, State.PARRYING]:
+		if not is_on_floor() && state != State.CLIMBING:
+			velocity += get_gravity() * delta
+			
+		var direction : float = Input.get_axis("Left", "Right")
+		if direction != 0.0:
+			if state != State.MOVING:
+				state = State.MOVING
+				$AnimatedSprite2D.animation = &"walk"
+			velocity.x = direction * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
+		
+		if velocity.x == 0 :
+			if state != State.IDLE:
+				state = State.IDLE
+				$AnimatedSprite2D.animation = &"idle"
+			
+		if Input.is_action_pressed("ClimbUp"):
+			if is_climbable():
+				state = State.CLIMBING
+				
+		if state == State.CLIMBING:
+			climb()
+			
+		face_mouse_direction()
+		move_and_slide()
+		
+	if state == State.CHARGING:
+		charge_time = move_toward(charge_time, max_charge_time, delta)
+	else : charge_time = 0.0
 
-	if not is_on_floor() && state != State.CLIMBING:
-		velocity += get_gravity() * delta
-
-	direction = Input.get_axis("Left", "Right")
-	if direction:
-		if state != State.MOVING:
-			state = State.MOVING
-			$AnimatedSprite2D.animation = &"walk"
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-
-	if Input.is_action_pressed("ClimbUp"):
-		if is_climbable():
-			state = State.CLIMBING
-
-	if state == State.CLIMBING:
-		climb()
-
-	face_mouse_direction()
-	move_and_slide()
 
 func face_mouse_direction() -> void:
 	var mouse_position: Vector2;
@@ -97,17 +97,18 @@ func face_mouse_direction() -> void:
 			_is_animation_flipped = true
 			$Weapon/Hitbox.position *= -1
 
-func hit() -> void:
-	var bodies_in_hitbox: Array[Node2D];
-
-	damage_multiplier = (charge_time / max_charge_time)
-	bodies_in_hitbox = $Weapon.get_overlapping_bodies()
-	print(bodies_in_hitbox)
-	for body in bodies_in_hitbox:
-		if body.is_in_group(&"enemy"):
-			body.hurt(damage_multiplier)
-	$AnimatedSprite2D.animation = &"idle"
-	state = State.IDLE
+#func hit() -> void:
+	#var bodies_in_hitbox: Array[Node2D];
+#
+	#damage_multiplier = (charge_time / max_charge_time)
+	#bodies_in_hitbox = $Weapon.get_overlapping_bodies()
+	#print(bodies_in_hitbox)
+	#for body in bodies_in_hitbox:
+		#if body.is_in_group(&"enemy"):
+			#body.hurt(damage_multiplier)
+	#$AnimatedSprite2D.animation = &"idle"
+	#state = State.IDLE
+	#print(33)
 
 func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
 	if state == State.PARRYING:
@@ -141,15 +142,9 @@ func climb() -> void:
 		velocity.y = -climb_velocity
 	else:
 		velocity.y = 0
-
-func _on_animated_sprite_2d_animation_finished():
-	if state == State.ATTACKING:
-		hit()
-	elif state == State.DYING:
+		
+func _on_animated_sprite_2d_animation_finished() :
+	if state == State.DYING :
 		var menu = load("res://scenes/menus/main_manu.tscn")
 		get_tree().change_scene_to_packed(menu)
 		self.queue_free()
-
-	else:
-		$AnimatedSprite2D.animation = &"idle"
-		state = State.IDLE

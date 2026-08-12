@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://comb3bdtq8kfj" path="res://assets/player/player-walk.png" id="8_f1ej7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pvuye"]
-size = Vector2(23, 34.22021)
+size = Vector2(13, 34.22021)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
 atlas = ExtResource("2_smehm")
@@ -361,7 +361,7 @@ animations = [{
 size = Vector2(6.5, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfe6u"]
-size = Vector2(23, 15)
+size = Vector2(13, 15)
 
 [node name="Player" type="CharacterBody2D" unique_id=535378298]
 script = ExtResource("1_3vyb7")
@@ -369,7 +369,7 @@ speed = 50.0
 max_charge_time = 2.0
 
 [node name="Hurtbox" type="CollisionShape2D" parent="." unique_id=737277221]
-position = Vector2(-0.5, -4.7683716e-07)
+position = Vector2(1, 0)
 scale = Vector2(1, 0.99356496)
 shape = SubResource("RectangleShape2D_pvuye")
 
@@ -390,13 +390,14 @@ shape = SubResource("RectangleShape2D_84e27")
 debug_color = Color(0.9667291, 0.17503422, 0.14910981, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=464109253]
+position = Vector2(0, 32)
 offset = Vector2(0, -50)
 position_smoothing_enabled = true
 
 [node name="InteractionArea" type="Area2D" parent="." unique_id=1714257803]
 
 [node name="Interactionbox" type="CollisionShape2D" parent="InteractionArea" unique_id=1170069700]
-position = Vector2(-0.5, 9.5)
+position = Vector2(1, 10)
 shape = SubResource("RectangleShape2D_nfe6u")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
