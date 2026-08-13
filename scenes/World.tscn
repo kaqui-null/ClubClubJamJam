@@ -7,6 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://366d665vk0iq" path="res://scenes/rooms/room4.tscn" id="5_0uv0p"]
 [ext_resource type="PackedScene" uid="uid://bx6rdeavmbda3" path="res://scenes/rooms/room5.tscn" id="6_b3faq"]
 [ext_resource type="AudioStream" uid="uid://8uft4dj1m31h" path="res://assets/effects/Music.mp3" id="7_0uv0p"]
+[ext_resource type="Shader" uid="uid://3qfwffhgl8t4" path="res://assets/shader/flashlight.gdshader" id="8_pdh0q"]
+[ext_resource type="Texture2D" uid="uid://bynkvgtdodpn4" path="res://assets/4x4bayer_dither.png" id="9_pdh0q"]
+[ext_resource type="Script" uid="uid://r1op8eybrbph" path="res://scripts/flashlight.gd" id="10_h1bdy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t23jj"]
+shader = ExtResource("8_pdh0q")
+shader_parameter/camera_zoom = Vector2(1, 1)
+shader_parameter/screen_size = Vector2(0, 0)
+shader_parameter/light_pos = Vector2(0, 0)
+shader_parameter/light_angle = 7.947
+shader_parameter/dither_atlas = ExtResource("9_pdh0q")
+shader_parameter/falloff = 40.0
+shader_parameter/intensity = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_bbxul"]
 
 [node name="World" type="Node" unique_id=894534142]
 
@@ -27,6 +42,17 @@ position = Vector2(1168, 192)
 [node name="Player" parent="." unique_id=535378298 instance=ExtResource("3_7g83o")]
 position = Vector2(32, 48)
 
+[node name="Marker2D" type="Marker2D" parent="Player" unique_id=170214441]
+position = Vector2(1, -7)
+
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1414220173]
 stream = ExtResource("7_0uv0p")
-autoplay = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=296573214 node_paths=PackedStringArray("player", "light")]
+material = SubResource("ShaderMaterial_t23jj")
+position = Vector2(25, 13)
+scale = Vector2(240, 160)
+mesh = SubResource("QuadMesh_bbxul")
+script = ExtResource("10_h1bdy")
+player = NodePath("../Player")
+light = NodePath("../Player/Marker2D")

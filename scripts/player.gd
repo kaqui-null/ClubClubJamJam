@@ -73,6 +73,8 @@ func _physics_process(delta: float) -> void:
 			climb()
 			
 		face_mouse_direction()
+		
+		
 		move_and_slide()
 		
 	if state == State.CHARGING:
@@ -148,3 +150,6 @@ func _on_animated_sprite_2d_animation_finished() :
 		var menu = load("res://scenes/menus/main_manu.tscn")
 		get_tree().change_scene_to_packed(menu)
 		self.queue_free()
+		
+func get_cam() -> Camera2D : 
+	return $Camera2D
