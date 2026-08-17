@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bmoqseq2p3r3n"]
+
+[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://scripts/player_new.gd" id="1_wm45n"]
+[ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://assets/player/player-idle.png" id="2_u2pge"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
+atlas = ExtResource("2_u2pge")
+region = Rect2(0, 0, 24, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yakf4"]
+size = Vector2(20, 35)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8kryg"]
+radius = 18.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1804488356]
+script = ExtResource("1_wm45n")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=209376474]
+position = Vector2(-12, -16)
+texture = SubResource("AtlasTexture_8kryg")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1163225015]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_yakf4")
+
+[node name="HandReach" type="CollisionShape2D" parent="." unique_id=805209015]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_8kryg")
+disabled = true
+debug_color = Color(1, 0.6, 0.69803923, 0.41960785)
+
+[node name="MainHand" type="Node2D" parent="." unique_id=1480934242]
+position = Vector2(15, -7)
