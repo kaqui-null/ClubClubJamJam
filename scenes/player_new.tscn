@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://tllgfleplwku" path="res://scripts/player_new.gd" id="1_wm45n"]
 [ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://assets/player/player-idle.png" id="2_u2pge"]
+[ext_resource type="Script" uid="uid://cmwubvuqpklju" path="res://scripts/hand.gd" id="3_u2pge"]
+[ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://icon.svg" id="4_b288l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
@@ -31,5 +33,10 @@ shape = SubResource("CircleShape2D_8kryg")
 disabled = true
 debug_color = Color(1, 0.6, 0.69803923, 0.41960785)
 
-[node name="MainHand" type="Node2D" parent="." unique_id=1480934242]
-position = Vector2(15, -7)
+[node name="MainHand" type="Node2D" parent="HandReach" unique_id=1480934242]
+position = Vector2(15, -4)
+script = ExtResource("3_u2pge")
+
+[node name="Sprite2D" type="Sprite2D" parent="HandReach/MainHand" unique_id=323132149]
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("4_b288l")
