@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://tllgfleplwku" path="res://scripts/player_new.gd" id="1_wm45n"]
 [ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://assets/player/player-idle.png" id="2_u2pge"]
-[ext_resource type="Script" uid="uid://cmwubvuqpklju" path="res://scripts/hand.gd" id="3_u2pge"]
+[ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://scripts/arm.gd" id="3_b288l"]
 [ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://icon.svg" id="4_b288l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
@@ -13,7 +13,13 @@ region = Rect2(0, 0, 24, 35)
 size = Vector2(20, 35)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8kryg"]
-radius = 18.0
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yakf4"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v4be5"]
+radius = 1.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
 script = ExtResource("1_wm45n")
@@ -24,19 +30,82 @@ texture = SubResource("AtlasTexture_8kryg")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1163225015]
+visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_yakf4")
 
-[node name="HandReach" type="CollisionShape2D" parent="." unique_id=805209015]
-position = Vector2(0, -3)
+[node name="Arm" type="Node2D" parent="." unique_id=1184276055]
+script = ExtResource("3_b288l")
+
+[node name="Shoulder" type="StaticBody2D" parent="Arm" unique_id=1039324246]
+position = Vector2(-3, -4)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Shoulder" unique_id=896278910]
 shape = SubResource("CircleShape2D_8kryg")
-disabled = true
-debug_color = Color(1, 0.6, 0.69803923, 0.41960785)
 
-[node name="MainHand" type="Node2D" parent="HandReach" unique_id=1480934242]
-position = Vector2(15, -4)
-script = ExtResource("3_u2pge")
+[node name="UpperArm" type="PinJoint2D" parent="Arm" unique_id=1550994698]
+position = Vector2(-3.0000005, -4.0000005)
+scale = Vector2(0.15, 0.15)
+node_a = NodePath("../Shoulder")
+node_b = NodePath("../Elbow")
+bias = 0.9
+angular_limit_lower = 1.96175
+angular_limit_upper = 3.1415927
 
-[node name="Sprite2D" type="Sprite2D" parent="HandReach/MainHand" unique_id=323132149]
-scale = Vector2(0.025, 0.025)
+[node name="Elbow" type="RigidBody2D" parent="Arm" unique_id=1043242746]
+collision_layer = 0
+collision_mask = 0
+mass = 0.4
+
+[node name="UpperArmSprite" type="Sprite2D" parent="Arm/Elbow" unique_id=1512596993]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(-2.0000002, -2)
+rotation = -0.55850536
+scale = Vector2(0.01, 0.049062498)
 texture = ExtResource("4_b288l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Arm/Elbow" unique_id=1069465530]
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("4_b288l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Elbow" unique_id=237533972]
+shape = SubResource("CircleShape2D_yakf4")
+
+[node name="ForeArm" type="PinJoint2D" parent="Arm" unique_id=1544666301]
+scale = Vector2(0.15, 0.15)
+node_a = NodePath("../Elbow")
+node_b = NodePath("../Wrist")
+bias = 0.9
+angular_limit_lower = 2.1380284
+angular_limit_upper = 1.6406095
+
+[node name="Wrist" type="RigidBody2D" parent="Arm" unique_id=19235455]
+position = Vector2(8, -2)
+collision_layer = 0
+collision_mask = 0
+mass = 0.3
+
+[node name="ForeArmSprite" type="Sprite2D" parent="Arm/Wrist" unique_id=2075686294]
+modulate = Color(1, 0, 1, 1)
+position = Vector2(-4, 1)
+rotation = -1.7680185
+scale = Vector2(0.010696981, 0.055635773)
+texture = ExtResource("4_b288l")
+
+[node name="Weapon" type="Sprite2D" parent="Arm/Wrist" unique_id=371824466]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, -6)
+scale = Vector2(0.0075, 0.10906249)
+texture = ExtResource("4_b288l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Arm/Wrist" unique_id=109150661]
+scale = Vector2(0.015, 0.015)
+texture = ExtResource("4_b288l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Wrist" unique_id=1955708624]
+shape = SubResource("CircleShape2D_v4be5")
+
+[node name="PassiveAttractor" type="Node2D" parent="Arm" unique_id=429689486]
+position = Vector2(6, 2)

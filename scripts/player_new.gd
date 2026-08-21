@@ -1,21 +1,20 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
-func _ready() -> void:
-	pass
+@export var SPEED: float = 100.0
+@export var GRAV_ACC: float = (35 / 1.8) * 9.81
 
 func _physics_process(delta: float) -> void:
+	movement(delta)
+
+func movement(delta: float) -> void:
+	var direction: float = Input.get_axis("Left", "Right")
+	
 	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	var direction := Input.get_axis("ui_left", "ui_right")
+		velocity += Vector2.DOWN * GRAV_ACC * delta
 	if direction:
 		velocity.x = direction * SPEED
+		$Arm/Elbow.apply_impulse(Vector2.RIGHT * direction * SPEED * $Arm/Elbow.mass * 0.2)
+		$Arm/Wrist.apply_impulse(Vector2.RIGHT * direction * SPEED * $Arm/Wrist.mass * 0.2)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
