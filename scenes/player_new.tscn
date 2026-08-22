@@ -74,6 +74,7 @@ texture = ExtResource("4_b288l")
 shape = SubResource("CircleShape2D_yakf4")
 
 [node name="ForeArm" type="PinJoint2D" parent="Arm" unique_id=1544666301]
+position = Vector2(0, 1)
 scale = Vector2(0.15, 0.15)
 node_a = NodePath("../Elbow")
 node_b = NodePath("../Wrist")
@@ -109,3 +110,6 @@ shape = SubResource("CircleShape2D_v4be5")
 
 [node name="PassiveAttractor" type="Node2D" parent="Arm" unique_id=429689486]
 position = Vector2(6, 2)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=326918526]
+position_smoothing_enabled = true
