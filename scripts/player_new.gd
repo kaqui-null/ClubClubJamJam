@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var SPEED: float = 100.0
-@export var GRAV_ACC: float = (35 / 1.8) * 9.81
+@export var GRAV_ACC: float = (35 / 1.8) * 9.81 ## Normalized with player height in pixels to imitate real world g.
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -20,6 +20,9 @@ func movement(delta: float) -> void:
 
 	move_and_slide()
 
+## Make arm independent of the inputted [code]instantaneous_acceleration[/code]. [br][br]
+## This is to attempt to make the arm not react too much to player's movement 
+## by applying an impulse that creates a similar change in velocity.
 func arm_impulse_response(instantaneous_acceleration: Vector2) -> void:
 	var arm: Array[RigidBody2D] = [$Arm/Elbow, $Arm/Wrist]
 	var impulse: Vector2;

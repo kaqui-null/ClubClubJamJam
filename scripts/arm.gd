@@ -13,16 +13,19 @@ func _physics_process(delta: float) -> void:
 		var wrist_rest_pos: Vector2 = $PassiveAttractor.position
 		linear_attract(wrist_rest_pos, $Wrist, PASSIVE_FORCE_STRENGTH)
 
+## Directly proportional to distance.
 func linear_attract(location: Vector2, body: RigidBody2D, scale: float) -> void:
 	var distance_from_target: Vector2 = location - body.position
 	
 	$Wrist.apply_central_force(distance_from_target * scale)
 
+## Does not scale with distance.
 func const_attract(location: Vector2, body: RigidBody2D, scale: float) -> void:
 	var distance_from_target: Vector2 = location - body.position
 	
 	$Wrist.apply_central_force(distance_from_target.normalized() * scale)
 
-func damp(... args: Array) -> void:
-	for body: RigidBody2D in args:
+## Apply counter-force to movement proportional to velocity for each body in arguments.
+func damp(... bodies: Array) -> void:
+	for body: RigidBody2D in bodies:
 		body.apply_central_force(- body.linear_velocity * DAMP_STRENGTH)
