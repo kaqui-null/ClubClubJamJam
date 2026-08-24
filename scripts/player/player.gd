@@ -13,7 +13,7 @@ var damage_multiplier: float = 0.0
 var charge_time: float = 0.0
 @export var max_charge_time: float;
 
-enum State {
+enum PlayerState {
 	IDLE,
 	CHARGING,
 	ATTACKING,
@@ -23,7 +23,7 @@ enum State {
 	DYING
 }
 
-var state: State = State.IDLE
+var state: PlayerState = PlayerState.IDLE
 
 signal got_parried(attacker)
 
@@ -37,39 +37,39 @@ func _physics_process(delta: float) -> void:
 	if defending or charging or releasing :
 		print("defending: "+str(defending)+" charging: "+str(charging)+" releasing: "+str(releasing))
 
-	if charging and not defending and state != State.CHARGING:
-		state = State.CHARGING
+	if charging and not defending and state != PlayerState.CHARGING:
+		state = PlayerState.CHARGING
 		$AnimatedSprite2D.animation = &"charging"
-	elif releasing and state != State.ATTACKING:
-		state = State.ATTACKING
+	elif releasing and state != PlayerState.ATTACKING:
+		state = PlayerState.ATTACKING
 		$AnimatedSprite2D.animation = &"attack"
-	elif defending and state != State.PARRYING:
-		state = State.PARRYING
+	elif defending and state != PlayerState.PARRYING:
+		state = PlayerState.PARRYING
 		$AnimatedSprite2D.animation = &"parry"
 
-	if state not in [State.DYING, State.ATTACKING, State.PARRYING]:
-		if not is_on_floor() && state != State.CLIMBING:
+	if state not in [PlayerState.DYING, PlayerState.ATTACKING, PlayerState.PARRYING]:
+		if not is_on_floor() && state != PlayerState.CLIMBING:
 			velocity += get_gravity() * delta
 			
 		var direction : float = Input.get_axis("Left", "Right")
 		if direction != 0.0:
-			if state != State.MOVING:
-				state = State.MOVING
+			if state != PlayerState.MOVING:
+				state = PlayerState.MOVING
 				$AnimatedSprite2D.animation = &"walk"
 			velocity.x = direction * speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 		
 		if velocity.x == 0 :
-			if state != State.IDLE:
-				state = State.IDLE
+			if state != PlayerState.IDLE:
+				state = PlayerState.IDLE
 				$AnimatedSprite2D.animation = &"idle"
 			
 		if Input.is_action_pressed("ClimbUp"):
 			if is_climbable():
-				state = State.CLIMBING
+				state = PlayerState.CLIMBING
 				
-		if state == State.CLIMBING:
+		if state == PlayerState.CLIMBING:
 			climb()
 			
 		face_mouse_direction()
@@ -77,7 +77,7 @@ func _physics_process(delta: float) -> void:
 		
 		move_and_slide()
 		
-	if state == State.CHARGING:
+	if state == PlayerState.CHARGING:
 		charge_time = move_toward(charge_time, max_charge_time, delta)
 	else : charge_time = 0.0
 
@@ -109,17 +109,17 @@ func face_mouse_direction() -> void:
 		#if body.is_in_group(&"enemy"):
 			#body.hurt(damage_multiplier)
 	#$AnimatedSprite2D.animation = &"idle"
-	#state = State.IDLE
+	#state = PlayerState.IDLE
 	#print(33)
 
 func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
-	if state == State.PARRYING:
+	if state == PlayerState.PARRYING:
 		parry(entity_hurting)
 
 	else:
 		health -= damage_dealt
 		if health <= 0:
-			state = State.DYING
+			state = PlayerState.DYING
 			$AnimatedSprite2D.animation = &"die"
 
 func parry(attacker: Node2D) -> void:
@@ -134,7 +134,7 @@ func is_climbable() -> bool:
 
 func climb() -> void:
 	if not is_climbable():
-		state = State.IDLE
+		state = PlayerState.IDLE
 		velocity.y = 0
 		return
 
@@ -146,7 +146,7 @@ func climb() -> void:
 		velocity.y = 0
 		
 func _on_animated_sprite_2d_animation_finished() :
-	if state == State.DYING :
+	if state == PlayerState.DYING :
 		var menu = load("res://scenes/menus/main_manu.tscn")
 		get_tree().change_scene_to_packed(menu)
 		self.queue_free()
