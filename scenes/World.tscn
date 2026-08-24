@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://366d665vk0iq" path="res://scenes/rooms/room4.tscn" id="5_0uv0p"]
 [ext_resource type="PackedScene" uid="uid://bx6rdeavmbda3" path="res://scenes/rooms/room5.tscn" id="6_b3faq"]
 [ext_resource type="AudioStream" uid="uid://8uft4dj1m31h" path="res://assets/effects/Music.mp3" id="7_0uv0p"]
-[ext_resource type="PackedScene" uid="uid://bmoqseq2p3r3n" path="res://scenes/player_new.tscn" id="10_pdh0q"]
+[ext_resource type="PackedScene" uid="uid://bmoqseq2p3r3n" path="res://scenes/Player.tscn" id="10_pdh0q"]
 
 [node name="World" type="Node" unique_id=894534142]
 

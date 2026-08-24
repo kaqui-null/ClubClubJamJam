@@ -1,9 +1,12 @@
 [gd_scene format=3 uid="uid://bmoqseq2p3r3n"]
 
-[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://scripts/player_new.gd" id="1_wm45n"]
+[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://scripts/player/player_new.gd" id="1_wm45n"]
+[ext_resource type="Script" uid="uid://ctarbou7y5sp3" path="res://scripts/utils/state/state_machine.gd" id="2_6ljwu"]
 [ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://assets/player/player-idle.png" id="2_u2pge"]
-[ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://scripts/arm.gd" id="3_b288l"]
+[ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://scripts/player/arm.gd" id="3_b288l"]
+[ext_resource type="Script" uid="uid://wrf3sdi7ent4" path="res://scripts/player/states/idle_state.gd" id="3_gvpj1"]
 [ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://icon.svg" id="4_b288l"]
+[ext_resource type="Script" uid="uid://dbtyau0ebjqtn" path="res://scripts/player/states/walk_state.gd" id="4_q1g3e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
@@ -23,6 +26,26 @@ radius = 1.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
 script = ExtResource("1_wm45n")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1774759063]
+script = ExtResource("2_6ljwu")
+metadata/_custom_type_script = "uid://ctarbou7y5sp3"
+
+[node name="IdleState" type="Node" parent="StateMachine" unique_id=1004300856]
+script = ExtResource("3_gvpj1")
+
+[node name="WalkState" type="Node" parent="StateMachine" unique_id=1019439136]
+script = ExtResource("4_q1g3e")
+
+[node name="AttackState" type="Node" parent="StateMachine" unique_id=522852411]
+
+[node name="ClimbState" type="Node" parent="StateMachine" unique_id=1076862175]
+
+[node name="ParryState" type="Node" parent="StateMachine" unique_id=1680638784]
+
+[node name="DeathState" type="Node" parent="StateMachine" unique_id=1805239518]
+
+[node name="CangeState" type="Node" parent="StateMachine" unique_id=1391203487]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=209376474]
 position = Vector2(-12, -16)

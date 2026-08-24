@@ -2,7 +2,7 @@ extends Node2D
 
 @export var DAMP_STRENGTH: float = 5
 @export var PASSIVE_FORCE_STRENGTH: float = 200
-@export var MOUSE_ATTRACT_STRENGTH: float = 1000
+@export var MOUSE_ATTRACT_STRENGTH: float = 1500
 
 func _physics_process(delta: float) -> void:
 	damp($Wrist, $Elbow)
