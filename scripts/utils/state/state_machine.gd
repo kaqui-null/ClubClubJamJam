@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 
 func change_state(state_name: String) -> void:
 	if not states.has(state_name):
-		printerr('No {state_name} State found!')
+		printerr("No " + state_name + " State found!")
 		return
 	
 	current_state.exit()
