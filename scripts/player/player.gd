@@ -7,7 +7,6 @@ func _physics_process(delta: float) -> void:
 	movement(delta)
 
 func movement(delta: float) -> void:
-	var old_velocity: Vector2 = velocity
 	var direction: float = Input.get_axis("Left", "Right")
 	
 	if not is_on_floor():
