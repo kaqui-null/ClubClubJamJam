@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://icon.svg" id="4_b288l"]
 [ext_resource type="Script" uid="uid://dbtyau0ebjqtn" path="res://scripts/player/states/walk_state.gd" id="4_q1g3e"]
 [ext_resource type="Script" uid="uid://bydluuooorbip" path="res://scripts/player/states/jump_state.gd" id="5_smehm"]
+[ext_resource type="Script" uid="uid://c6j8ut5mkpmcf" path="res://scripts/player/states/climb_state.gd" id="6_ur7pv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
@@ -44,6 +45,7 @@ script = ExtResource("5_smehm")
 [node name="AttackState" type="Node" parent="StateMachine" unique_id=522852411]
 
 [node name="ClimbState" type="Node" parent="StateMachine" unique_id=1076862175]
+script = ExtResource("6_ur7pv")
 
 [node name="ParryState" type="Node" parent="StateMachine" unique_id=1680638784]
 
