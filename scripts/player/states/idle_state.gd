@@ -17,8 +17,8 @@ func update(delta: float) -> void:
 		machine.change_state("JumpState")
 	
 	# Climb input
-	if target.is_climbable():
-		machine.change_state("ClimbState")
+	#if target.is_climbable() and Input.get_axis("ClimbUp", "ClimbDown") != 0:
+		#machine.change_state("ClimbState")
 
 func physics_update(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right")

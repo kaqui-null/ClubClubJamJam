@@ -4,17 +4,19 @@ extends State
 var direction: float
 var velocity: Vector2
 
-func _process(delta: float) -> void:
-	pass
-
 func enter() -> void:
-	pass
+	velocity = Vector2.ZERO
 
 func update(delta: float) -> void:
-	pass
+	if direction == 0:
+		machine.change_state("IdleState")
 
 func physics_update(delta: float) -> void:
-	pass
+	direction = Input.get_axis("Left", "Right")
+	
+	target.velocity.x = direction * target.SPEED
+	
+	target.move_and_slide()
 
 func exit() -> void:
 	pass

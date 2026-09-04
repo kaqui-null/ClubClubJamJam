@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var SPEED: float = 100.0
+@export var JUMP_SPEED: float = -400.0
 @export var GRAV_ACC: float = (35 / 1.8) * 9.81 ## Normalized with player height in pixels to imitate real world g.
 
 func _physics_process(delta: float) -> void:
@@ -30,3 +31,11 @@ func arm_impulse_response(instantaneous_acceleration: Vector2) -> void:
 	for body in arm:
 		impulse = body.mass * instantaneous_acceleration * 0.2
 		body.apply_impulse(impulse)
+
+# TODO: Create function to check if player can climb
+#func is_climbable() -> bool:
+	#for area: Area2D in $CollisionShape2D.get_overlapping_areas():
+		#if area.is_in_group("ladder"):
+			#return true
+	#
+	#return false

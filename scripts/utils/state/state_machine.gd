@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	current_state.physics_update(delta)
+	print(current_state.name)
 
 func change_state(state_name: String) -> void:
 	if not states.has(state_name):
