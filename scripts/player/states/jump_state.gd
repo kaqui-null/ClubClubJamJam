@@ -1,7 +1,7 @@
 class_name JumpState
 extends State
 
-var direction: int
+var direction: float
 var velocity: Vector2
 
 func enter() -> void:
@@ -15,6 +15,10 @@ func update(delta: float) -> void:
 	# Touched ground
 	if target.is_on_floor():
 		machine.change_state("IdleState")
+	
+	# Climb input
+	if target.is_climbable():
+		machine.change_state("ClimbState")
 
 func physics_update(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right")
