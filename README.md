@@ -8,5 +8,8 @@
 - ConfusedParrotFish
 - Enzo
 
+## Docs
+- [Estructure Documentation](Docs/DirectoryGuide.md)
+
 ## Specifications
 - Godot 4.7.1v
