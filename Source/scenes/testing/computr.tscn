@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://d1uo6a0co3gxy"]
+
+[ext_resource type="Shader" path="res://assets/shader/computer.gdshader" id="1_0jyhc"]
+[ext_resource type="Texture2D" path="res://assets/char_gen.png" id="2_335ji"]
+[ext_resource type="Script" uid="uid://yswta0dxophp" path="res://Source/scripts/computer/compupter.gd" id="3_0jyhc"]
+[ext_resource type="Script" path="res://scripts/computor/term_activity.gd" id="4_rgyoi"]
+[ext_resource type="Script" path="res://scripts/computor/reboot_activity.gd" id="5_8hb6y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t23jj"]
+shader = ExtResource("1_0jyhc")
+shader_parameter/palette = PackedColorArray(0.81960785, 0.81960785, 0.6313726, 1, 0.61960787, 0.28235295, 0.6509804, 1, 0.827451, 0.6156863, 0.7882353, 1, 0.40784314, 0.6313726, 0.38039216, 1, 0.8509804, 0.37254903, 0.40392157, 1, 0.9019608, 0.80784315, 0.47058824, 1, 0.83137256, 0.78431374, 0.80784315, 1, 0.6745098, 0.5411765, 0.7647059, 1, 0.7269997, 0.22000003, 1, 1, 0.14720011, 0.032000016, 0.8, 1, 0, 1, 0.083333254, 1, 0, 0.75, 1, 1, 0.0924, 0.6344798, 0.77, 1, 0.40334004, 0.1634, 0.43, 1, 0.20999995, 0.6, 0.15, 1, 0.89, 0.35599998, 0.46280015, 1)
+shader_parameter/grid = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/chars = 0
+shader_parameter/char_map = ExtResource("2_335ji")
+
+[sub_resource type="QuadMesh" id="QuadMesh_bbxul"]
+
+[node name="Control" type="Control" unique_id=2071785731]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2040167312]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.5647059, 0.78039217, 1)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=35851434 node_paths=PackedStringArray("activities")]
+material = SubResource("ShaderMaterial_t23jj")
+position = Vector2(119, 81)
+scale = Vector2(207.99997, 129.99998)
+mesh = SubResource("QuadMesh_bbxul")
+script = ExtResource("3_0jyhc")
+startup_message = "\\*space\\*space\\#triangle_bottom_left\\
+\\*space\\*space\\#full\\#triangle_bottom_left\\
+\\*space\\*space\\#full\\#bite_left\\#carat_left\\  
+\\*space\\#triangle_bottom_right\\#full\\#triangle_top_left\\ Palindrome Oceanic
+\\#carat_right\\#bite_right\\#full\\
+\\*space\\#triangle_top_right\\#full\\ Soapstone OS 2.3; Copyright 1987
+\\*space\\*space\\#triangle_top_right\\
+------------------------------------------------"
+activities = {
+"reboot": NodePath("reboot_activity"),
+"terminal": NodePath("term_activity")
+}
+
+[node name="term_activity" type="Node2D" parent="MeshInstance2D" unique_id=153792686]
+visible = false
+script = ExtResource("4_rgyoi")
+help = "use the following commands to explore and 
+discover the computer:
+ clear  - clear the screen
+ fs     - explore files
+ help   - display this message
+ system - display system info
+ reboot - reboot the system"
+system = "\\*space\\*space\\*space\\*space\\#triangle_bottom_left\\*space\\*space\\*space\\*space\\Palindrome Oceanic, C 1987
+\\*space\\*space\\*space\\*space\\#full\\#triangle_bottom_left\\*space\\*space\\*space\\---------------------------------------\\*space\\*space\\*space\\*space\\#full\\#triangle_top_right\\#triangle_bottom_left\\*space\\*space\\OS: Soapstone 2.3
+\\*space\\*space\\*space\\*space\\#full\\#triangle_bottom_right\\#triangle_top_left\\*space\\*space\\Kernel: Soapstone 2.0.4
+\\*space\\*space\\*space\\#triangle_bottom_right\\#full\\#triangle_top_left\\*space\\*space\\*space\\Display: 480x300 
+\\*space\\*space\\#triangle_bottom_right\\#triangle_top_left\\#full\\*space\\*space\\*space\\*space\\CPU: Oct c-3 rev 759 @ 15MHz
+\\*space\\*space\\#triangle_top_right\\#triangle_bottom_left\\#full\\*space\\*space\\*space\\*space\\RAM: 512Kb
+\\*space\\*space\\*space\\#triangle_top_right\\#full\\*space\\*space\\*space\\*space\\DISK: 35MB / 40Mb (87%) 
+\\*space\\*space\\*space\\*space\\#triangle_top_right\\*space\\*space\\*space\\*space\\Locale: en.oct-8"
+
+[node name="reboot_activity" type="Node2D" parent="MeshInstance2D" unique_id=811356171]
+script = ExtResource("5_8hb6y")
+computery_bullshit = "ldi 0d
+str@t
+brk
+ldx
+# ldi 10d 
+str@q # store 10 in q
+ldi 1d # shift in 1
+ldi 1d # shift in 1
+str@w # store 1 in w
+str@e # store 1 in e
+
+:top 
+    ldr@e # shift in e [e]
+    ldr@w # shift in w [e,w]
+    add # add [e+w]
+    ldr@w # shift in w [e+w,w]
+    puh # push to stack <e+w> [w]
+    pop # pop from stack [w,e+w]
+    str@e # store w in e [e+w]
+    str@w # store e+w in w []
+    # print (w)
+    brk
+    ldr@w
+    stx
+
+    ldr@t # shift in t [t]
+    ldi 1d
+    add
+    str@t
+    ldr@t
+
+    ldr@q # shift in q [e+w,q]
+    lte # lte [0xff ? e+w <= q : 0x00]
+    str@r # store 0xff ? e+w <= q : 0x00 in r []
+    ldr@r # shift in r [r]
+    not   # not [!r]
+    ldi $top # [!r, :bottom]
+    and # [res]
+    puh # <res>
+    ldr@r # <res> [r] 
+    ldi $bottom # shift in :top <res> [r, :top]
+    and # and <res> [rek]
+    pop # [res, rek]
+    or # [rel]
+    stp # jump to :top ? e+w <= q : :bottom
+
+:bottom
+    cst
+    ldi $bottom
+    stp
+
+include ./example/ink/irt.oct
+include ./example/graphics/header.oct
+:entry
+
+ldi 0d # [0]
+ldr@a # set a to 0 []
+
+:trap
+    cst # []
+
+    # inefficient to do this but it's fast so who cares
+    ldi .PPU_SWAP_INSTR # [.PPU_SWAP_INSTR]
+    stx # []
+    
+    ldr@a # [a]
+    # ldi 0d
+    ldi .PPU_CHAR_INC_INSTR # [.PPU_CHAR_INC_INSTR, a]
+    or # [.PPU_CHAR_INC_INSTR|a]
+    stx # []
+
+    ldr@a # [a]
+    ldi 2d # [2, a]
+    add # [a+2]
+    ldi fx # [fx, a+2]
+    and # [(a+2)&fx]
+    ldi 8d # [8, (a+2)&fx]
+    add # [(a+2)&fx+8]
+    ldi 4d # [4, (a+2)&fx+8]
+    lsh # [((a+2)&fx+8)<<4]
+    ldi 2d # [2, ((a+2)&fx+8)<<4]
+    add # [(((a+2)&fx+8)<<4)+2]
+    str@j # []
+    ldr@a # [a]
+    ldi fx # [fx, a]
+    and # [a&fx]
+    ldr@j # [j, a&fx]
+    or # [j|(a&fx)]
+    ldi .PPU_PALLETTE_INSTR # [.PPU_PALLETTE_INSTR, j|(a&fx)]
+    or # [j|(a&fx)|.PPU_PALLETTE_INSTR]
+    stx # []
+
+    ldr@a # [a]
+    ldi 1d # [1, a]
+    add # [1+a]
+    ldi < .WIDTH .HEIGHT * # [fx, 1+a]
+    mod
+    str@a
+
+    ldr@a # [a]
+    # ldi 0d
+    ldi .PPU_CHAR_INSTR # [.PPU_CHAR_INC_INSTR, a]
+    or # [.PPU_CHAR_INC_INSTR|a]
+    stx # []
+
+    ldi $trap
+    stp
+"
