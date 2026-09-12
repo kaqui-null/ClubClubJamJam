@@ -1,8 +1,14 @@
 extends CharacterBody2D
 
+signal got_parried(attacker)
+
 @export var SPEED: float = 100.0
 @export var JUMP_SPEED: float = -400.0
 @export var GRAV_ACC: float = (35 / 1.8) * 9.81 ## Normalized with player height in pixels to imitate real world g.
+
+var health: float = 100
+
+@onready var machine_state_node: StateMachine = get_node("StateMachine")
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -20,6 +26,10 @@ func movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func get_current_state() -> String:
+	machine_state_node = get_node("StateMachine")
+	return machine_state_node.current_state.name
 
 ## Make arm independent of the inputted [code]instantaneous_acceleration[/code]. [br][br]
 ## This is to attempt to make the arm not react too much to player's movement 
@@ -39,3 +49,16 @@ func arm_impulse_response(instantaneous_acceleration: Vector2) -> void:
 			#return true
 	#
 	#return false
+
+# TODO: Create a Parry function, preferably on ParryState
+
+func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
+	if get_current_state() == "ParryState":
+		#parry(entity_hurting)
+		pass
+
+	else:
+		health -= damage_dealt
+		if health <= 0:
+			machine_state_node.change_state("DieState")
+			#$AnimatedSprite2D.animation = &"die"

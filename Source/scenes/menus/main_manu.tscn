@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://dlwvlm0sufxhh"]
 
-[ext_resource type="Script" uid="uid://dnwg1m2atlvq1" path="res://scripts/menus/main_menu.gd" id="1_6bes2"]
-[ext_resource type="PackedScene" uid="uid://cyg5ppkyoi0fg" path="res://scenes/World.tscn" id="2_6bes2"]
-[ext_resource type="Texture2D" uid="uid://cbhys3342g8g2" path="res://assets/UI/menu-background.png" id="2_u6sas"]
-[ext_resource type="Texture2D" uid="uid://cvr1jfprl7cq7" path="res://assets/UI/play-button.png" id="3_6bes2"]
-[ext_resource type="Texture2D" uid="uid://b4ev24c7gpohp" path="res://assets/UI/play-button-pressed.png" id="4_kbml0"]
-[ext_resource type="Texture2D" uid="uid://i3acyka7mjjp" path="res://assets/UI/quit-button.png" id="5_8i0my"]
-[ext_resource type="Texture2D" uid="uid://bdrucg1koo7s" path="res://assets/UI/quit-button-down.png" id="6_yvxhh"]
+[ext_resource type="Script" uid="uid://dnwg1m2atlvq1" path="res://Source/scripts/menus/main_menu.gd" id="1_6bes2"]
+[ext_resource type="PackedScene" uid="uid://cyg5ppkyoi0fg" path="res://Source/scenes/World.tscn" id="2_6bes2"]
+[ext_resource type="Texture2D" uid="uid://cbhys3342g8g2" path="res://Source/assets/UI/menu-background.png" id="2_u6sas"]
+[ext_resource type="Texture2D" uid="uid://cvr1jfprl7cq7" path="res://Source/assets/UI/play-button.png" id="3_6bes2"]
+[ext_resource type="Texture2D" uid="uid://b4ev24c7gpohp" path="res://Source/assets/UI/play-button-pressed.png" id="4_kbml0"]
+[ext_resource type="Texture2D" uid="uid://i3acyka7mjjp" path="res://Source/assets/UI/quit-button.png" id="5_8i0my"]
+[ext_resource type="Texture2D" uid="uid://bdrucg1koo7s" path="res://Source/assets/UI/quit-button-down.png" id="6_yvxhh"]
 
 [node name="MainMenu" type="Control" unique_id=623371281]
 layout_mode = 3
