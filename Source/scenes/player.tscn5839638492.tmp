@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://bmoqseq2p3r3n"]
 
-[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://Source/scripts/player/player_new.gd" id="1_wm45n"]
-[ext_resource type="Script" uid="uid://ctarbou7y5sp3" path="res://Source/scripts/utils/state/state_machine.gd" id="2_6ljwu"]
-[ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://Source/assets/player/player-idle.png" id="2_u2pge"]
-[ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://Source/scripts/player/arm.gd" id="3_b288l"]
-[ext_resource type="Script" uid="uid://wrf3sdi7ent4" path="res://Source/scripts/player/states/idle_state.gd" id="3_gvpj1"]
-[ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://Source/icon.svg" id="4_b288l"]
-[ext_resource type="Script" uid="uid://dbtyau0ebjqtn" path="res://Source/scripts/player/states/walk_state.gd" id="4_q1g3e"]
-[ext_resource type="Script" uid="uid://bydluuooorbip" path="res://Source/scripts/player/states/jump_state.gd" id="5_smehm"]
-[ext_resource type="Script" uid="uid://c6j8ut5mkpmcf" path="res://Source/scripts/player/states/climb_state.gd" id="6_ur7pv"]
+[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://scripts/player/player_new.gd" id="1_wm45n"]
+[ext_resource type="Script" uid="uid://ctarbou7y5sp3" path="res://scripts/utils/state/state_machine.gd" id="2_6ljwu"]
+[ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://assets/player/player-idle.png" id="2_u2pge"]
+[ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://scripts/player/arm.gd" id="3_b288l"]
+[ext_resource type="Script" uid="uid://wrf3sdi7ent4" path="res://scripts/player/states/idle_state.gd" id="3_gvpj1"]
+[ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://icon.svg" id="4_b288l"]
+[ext_resource type="Script" uid="uid://dbtyau0ebjqtn" path="res://scripts/player/states/walk_state.gd" id="4_q1g3e"]
+[ext_resource type="Script" uid="uid://bydluuooorbip" path="res://scripts/player/states/jump_state.gd" id="5_smehm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
@@ -45,7 +44,6 @@ script = ExtResource("5_smehm")
 [node name="AttackState" type="Node" parent="StateMachine" unique_id=522852411]
 
 [node name="ClimbState" type="Node" parent="StateMachine" unique_id=1076862175]
-script = ExtResource("6_ur7pv")
 
 [node name="ParryState" type="Node" parent="StateMachine" unique_id=1680638784]
 
