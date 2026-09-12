@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bynkvgtdodpn4"
-path="res://.godot/imported/4x4bayer_dither.png-97edb5953cc5415572d942879f17c19e.ctex"
+uid="uid://b5vl8eid7oir"
+path="res://.godot/imported/char_gen.png-1e6058c34a507d52b1a7ab1a38a6a006.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Source/assets/4x4bayer_dither.png"
-dest_files=["res://.godot/imported/4x4bayer_dither.png-97edb5953cc5415572d942879f17c19e.ctex"]
+source_file="res://Assets/char_gen.png"
+dest_files=["res://.godot/imported/char_gen.png-1e6058c34a507d52b1a7ab1a38a6a006.ctex"]
 
 [params]
 
