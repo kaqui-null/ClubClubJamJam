@@ -14,12 +14,12 @@ func _ready() -> void :
 		while idx.x < start.x :
 			start.x -= 1
 			width += 1
-			for row in repr : row.push_front(0)
+			for row : Array[int] in repr : row.push_front(0)
 			if dbg : print("push left")
 		
 		while idx.x >= width+start.x :
 			width += 1
-			for row in repr : row.push_back(0)
+			for row : Array[int] in repr : row.push_back(0)
 			if dbg : print("push right")
 		
 		while idx.y < start.y :
@@ -45,9 +45,9 @@ func _ready() -> void :
 			print(str(idx))
 			print("start"+str(start))
 			print("dim("+str(width)+", "+str(height)+")")
-			for row in repr :
-				var tem = ""
-				for chr in row :
+			for row : Array[int] in repr :
+				var tem : String = ""
+				for chr : int in row :
 					tem+= "_" if chr == 0 else "@"
 				print(tem)
 			print("\n")
@@ -55,13 +55,13 @@ func _ready() -> void :
 	file_write(repr, start)
 
 func file_write(repr: Array, start: Vector2i) -> void :
-	var file = FileAccess.open(file_path, FileAccess.WRITE)
+	var file : FileAccess = FileAccess.open(file_path, FileAccess.WRITE)
 	file.store_string(
 		"s"+str(start_room_idx.x)+":"+str(start_room_idx.y)+
 		", o"+str(start_room_idx.x-start.x-1)+":"+str(start_room_idx.y-start.y-1)+
 		", \n"
 	)
-	for rep in repr :
+	for rep : Array[int] in repr :
 		var temp : String = ""
 		var count : int = 0
 		for to_proc_idx : int in range(0, rep.size()) :
@@ -83,7 +83,7 @@ func id_from_coords(pos: Vector2i) -> int:
 	return sum(pos.x+pos.y)+pos.y
 
 func sum(i: int) -> int :
-	var temp = 0
+	var temp : int = 0
 	for j in range(0, i+1) :
 		temp+=j
 	return temp

@@ -35,7 +35,7 @@ func put(index: Vector2i, room_id: int) -> bool :
 # gets the first room with the specified room_id, returns null if one cannot be found
 func index_of(room_id: int) -> Variant: 
 	for row in space.size() :
-		for col in space[row].size() :
+		for col : int in space[row].size() :
 			if space[row][col] == room_id :
 				return Vector2i(col,row)
 	return null
@@ -45,25 +45,25 @@ func index_of(room_id: int) -> Variant:
 # NOTE: this is called by the layout manager after all rooms are registered, it should be the final thing
 # to run before the invariants of the layout manager are considered valid.
 func read() -> void : 
-	var file = FileAccess.open(file_path, FileAccess.READ)
+	var file : FileAccess = FileAccess.open(file_path, FileAccess.READ)
 	var file_content : Array = Array(file.get_as_text().remove_chars("\r").split("\n",false))
-	var control = file_content.pop_front()
+	var control : String = file_content.pop_front()
 	file.close()
-	for line in file_content:
+	for line : String in file_content:
 		var row : Array[int] = []
 		for word : String in line.remove_chars(" ").split(",",false):
 			if word.strip_edges().begins_with("'") :
-				var packed = word.substr(1).split(":",false)
+				var packed : Array[String] = word.substr(1).split(":",false)
 				if packed.size() == 2 :
 					for unit in int(packed[0]) :
 						row.push_back(int(packed[1]))
 				# TODO, some sort of error here for incorrect packing
 			else : row.push_back(int(word))
 		space.push_back(row)
-	var found = false
+	var found : bool = false
 	for ctrl : String in control.remove_chars(" ").split(",",false) : 
 		if ctrl.strip_edges().begins_with("o") :
-			var packed = ctrl.substr(1).split(":",false)
+			var packed : Array[String] = ctrl.substr(1).split(":",false)
 			if packed.size() == 2 :
 				start = Vector2i(int(packed[0]), int(packed[1]))
 				found = true

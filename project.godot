@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ClubClubJamJam"
-run/main_scene="uid://dlwvlm0sufxhh"
+run/main_scene="uid://ic1yfvu1mc2c"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

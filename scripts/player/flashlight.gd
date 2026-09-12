@@ -20,14 +20,14 @@ func _process(_delta: float) -> void:
 		mat.set_shader_parameter("screen_size", get_viewport_rect().size)
 		mat.set_shader_parameter("light_pos", light.global_position)
 		
-		var p = get_global_mouse_position()-light.global_position
-		var a = ((acos(p.x/sqrt(p.x*p.x+p.y*p.y))+PI/2.)*
+		var p : Vector2= get_global_mouse_position()-light.global_position
+		var a : float = ((acos(p.x/sqrt(p.x*p.x+p.y*p.y))+PI/2.)*
 				(-1. if p.y >= 0. else 1.)+
 				(-PI if p.y >= 0. else 0.))
 		
 		mat.set_shader_parameter("light_angle", a)
 		
-		var world_position = get_viewport().get_camera_2d().get_canvas_transform().affine_inverse() * Vector2(0, 0)
+		var world_position : Vector2 = get_viewport().get_camera_2d().get_canvas_transform().affine_inverse() * Vector2(0, 0)
 		global_position = world_position+scale/2
 		
 		
