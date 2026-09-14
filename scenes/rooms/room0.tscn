@@ -7,11 +7,17 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0j4cp"]
 texture = ExtResource("2_jqbo6")
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
 1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
 
 [sub_resource type="TileSet" id="TileSet_qdqsw"]
+physics_layer_0/collision_layer = 32
+physics_layer_0/collision_mask = 32
 sources/0 = SubResource("TileSetAtlasSource_0j4cp")
 
 [node name="Room" type="Node2D" unique_id=1838254503]
@@ -37,7 +43,7 @@ tile_set = ExtResource("1_alonr")
 collision_enabled = false
 
 [node name="Exits" type="TileMapLayer" parent="." unique_id=728713363]
-tile_map_data = PackedByteArray("AAANAAQAAAACAAAAAAAQAAMAAAADAAAAAAAPAAQAAAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAAQAAQAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_qdqsw")
 collision_enabled = false
 navigation_enabled = false

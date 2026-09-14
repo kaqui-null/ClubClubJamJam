@@ -1,14 +1,19 @@
 class_name Room
 extends Node2D
 
+var ROOM_ID: int;
 var exits: Array[Vector2i];
 var exit_exists: Array[bool]; 
 enum ExitDir {UP, RIGHT, DOWN, LEFT} # clockwise
 
+signal room_exited(room_id: int, dir: ExitDir)
+
+
 func _ready() -> void:
-	if not Engine.is_editor_hint():
-		update_exits()
-		$Exits.visible = false
+	exits.resize(4)
+	exit_exists.resize(4)
+	update_exits()
+	$Exits.visible = false
 
 func connect_to_room(target: Room, opposing_dir: ExitDir) -> void:
 	var vec_mapped_to_dir := [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
@@ -24,7 +29,7 @@ func connect_to_room(target: Room, opposing_dir: ExitDir) -> void:
 						+ vec_mapped_to_dir[opposing_dir] 
 						- Vector2(exits[dir]))
 	global_position = placement_location
-		
+
 func update_exits() -> void:
 	var cells: Array[Vector2i];
 

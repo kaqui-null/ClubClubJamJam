@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cyg5ppkyoi0fg"]
 
 [ext_resource type="PackedScene" uid="uid://b4gp5xcbq2cs4" path="res://scenes/rooms/room1.tscn" id="1_32lhk"]
+[ext_resource type="Script" uid="uid://cs011crf4x4jr" path="res://world_layout/layout_loader.gd" id="1_ygioq"]
 [ext_resource type="PackedScene" uid="uid://cjplm68jrow8a" path="res://scenes/rooms/room2.tscn" id="2_7g83o"]
+[ext_resource type="Script" uid="uid://cuvhc0k3ff4jk" path="res://world_layout/layout_manager.gd" id="2_pdh0q"]
 [ext_resource type="PackedScene" uid="uid://b2wu1hn16qpc" path="res://scenes/rooms/room3.tscn" id="4_hlk0d"]
 [ext_resource type="PackedScene" uid="uid://366d665vk0iq" path="res://scenes/rooms/room4.tscn" id="5_0uv0p"]
 [ext_resource type="PackedScene" uid="uid://bx6rdeavmbda3" path="res://scenes/rooms/room5.tscn" id="6_b3faq"]
@@ -9,6 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://bmoqseq2p3r3n" path="res://scenes/Player.tscn" id="10_pdh0q"]
 
 [node name="World" type="Node" unique_id=894534142]
+
+[node name="Layout" type="Node" parent="." unique_id=95118809]
+
+[node name="Loader" type="Node" parent="Layout" unique_id=721187011]
+script = ExtResource("1_ygioq")
+
+[node name="Manager" type="Node" parent="Layout" unique_id=1218807738]
+script = ExtResource("2_pdh0q")
 
 [node name="Room1" parent="." unique_id=1838254503 instance=ExtResource("1_32lhk")]
 

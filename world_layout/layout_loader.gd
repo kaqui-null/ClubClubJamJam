@@ -3,7 +3,7 @@ extends Node2D
 ## Tells the loader where to load the world from.
 @export var file_path : String = "res://assets/world_layout.lyt.txt"
 
-var space : Array = []
+var space : Array[Array] = []
 var start : Vector2i
 
 ## Gets the room-id of the room at the specified [param index], returns [code]null[/code] if none present.
@@ -13,7 +13,7 @@ func at(index: Vector2i) -> Variant:
 	else : return null
 
 ## Returns [code]true[/code] if there is a room present at specified [param index], returns [code]false[/code] otherwise
-func has(index: Vector2i) -> bool : 
+func has(index: Vector2i) -> bool: 
 	return (
 		index.y >= 0 &&
 		index.x >= 0 &&
@@ -32,13 +32,15 @@ func put(index: Vector2i, room_id: int) -> bool :
 		return true
 	return false
 
-## Gets the first room with the specified [param room_id], returns [code]null[/code] if one cannot be found.
-func index_of(room_id: int) -> Variant: 
+## Returns an array of indices with the specified [param room_id].
+func locations_of(room_id: int) -> Array[Vector2i]: 
+	var indices: Array[Vector2i] = [];
+
 	for row in space.size() :
 		for col in space[row].size() :
 			if space[row][col] == room_id :
-				return Vector2i(col,row)
-	return null
+				indices.append(Vector2i(col,row))
+	return indices
 
 ## Reads in the data from the file. [br]
 ## [i](after this function returns, the invariants of the layout loader
