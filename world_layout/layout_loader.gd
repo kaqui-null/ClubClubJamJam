@@ -10,7 +10,7 @@ var start : Vector2i
 func at(index: Vector2i) -> Variant: 
 	if has(index): 
 		return space[index.y][index.x]
-	else : return null
+	else: return null
 
 ## Returns [code]true[/code] if there is a room present at specified [param index], returns [code]false[/code] otherwise
 func has(index: Vector2i) -> bool: 

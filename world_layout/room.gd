@@ -1,12 +1,13 @@
 class_name Room
 extends Node2D
 
-var ROOM_ID: int;
+var ID: int;
+var INDEX: Vector2i;
 var exits: Array[Vector2i];
 var exit_exists: Array[bool]; 
 enum ExitDir {UP, RIGHT, DOWN, LEFT} # clockwise
 
-signal room_exited(room_id: int, dir: ExitDir)
+signal room_exited(_Room: Room, dir: ExitDir)
 
 
 func _ready() -> void:
@@ -16,7 +17,7 @@ func _ready() -> void:
 	$Exits.visible = false
 
 func connect_to_room(target: Room, opposing_dir: ExitDir) -> void:
-	var vec_mapped_to_dir := [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
+	var vec_mapped_to_dir := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 	var tilesize: int = $Exits.tile_set.tile_size.x 
 	var dir: ExitDir = opposite(opposing_dir)
 	var placement_location: Vector2 = target.global_position
@@ -55,10 +56,10 @@ func print_exits() -> void:
 			print(dir_name(dir) + " = " + "Absent")
 	print(" ")
 
-func dir_name(dir: ExitDir) -> String:
+static func dir_name(dir: ExitDir) -> String:
 	return ExitDir.keys()[dir]
 
-func opposite(dir: ExitDir) -> ExitDir:
+static func opposite(dir: ExitDir) -> ExitDir:
 	if dir > 1:
 		dir -= 2
 	else:
