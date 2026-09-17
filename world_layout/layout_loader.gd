@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 ## Tells the loader where to load the world from.
 @export var file_path : String = "res://assets/world_layout.lyt.txt"

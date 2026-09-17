@@ -5,6 +5,8 @@ var ID: int;
 var INDEX: Vector2i;
 var exits: Array[Vector2i];
 var exit_exists: Array[bool]; 
+var has_spawnpoint: bool;
+var spawn_location: Vector2i;
 enum ExitDir {UP, RIGHT, DOWN, LEFT} # clockwise
 
 signal room_exited(_Room: Room, dir: ExitDir)
