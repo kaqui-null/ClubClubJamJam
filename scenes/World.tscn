@@ -1,14 +1,8 @@
 [gd_scene format=3 uid="uid://cyg5ppkyoi0fg"]
 
-[ext_resource type="PackedScene" uid="uid://b4gp5xcbq2cs4" path="res://scenes/rooms/room1.tscn" id="1_32lhk"]
 [ext_resource type="Script" uid="uid://cs011crf4x4jr" path="res://world_layout/layout_loader.gd" id="1_ygioq"]
-[ext_resource type="PackedScene" uid="uid://cjplm68jrow8a" path="res://scenes/rooms/room2.tscn" id="2_7g83o"]
 [ext_resource type="Script" uid="uid://cuvhc0k3ff4jk" path="res://world_layout/layout_manager.gd" id="2_pdh0q"]
-[ext_resource type="PackedScene" uid="uid://b2wu1hn16qpc" path="res://scenes/rooms/room3.tscn" id="4_hlk0d"]
-[ext_resource type="PackedScene" uid="uid://366d665vk0iq" path="res://scenes/rooms/room4.tscn" id="5_0uv0p"]
-[ext_resource type="PackedScene" uid="uid://bx6rdeavmbda3" path="res://scenes/rooms/room5.tscn" id="6_b3faq"]
 [ext_resource type="AudioStream" uid="uid://8uft4dj1m31h" path="res://assets/effects/Music.mp3" id="7_0uv0p"]
-[ext_resource type="PackedScene" uid="uid://bmoqseq2p3r3n" path="res://scenes/Player.tscn" id="10_pdh0q"]
 
 [node name="World" type="Node" unique_id=894534142]
 
@@ -20,23 +14,5 @@ script = ExtResource("1_ygioq")
 [node name="Manager" type="Node" parent="Layout" unique_id=1218807738]
 script = ExtResource("2_pdh0q")
 
-[node name="Room1" parent="." unique_id=1838254503 instance=ExtResource("1_32lhk")]
-
-[node name="Room2" parent="." unique_id=1974077497 instance=ExtResource("2_7g83o")]
-position = Vector2(272, 0)
-
-[node name="Room3" parent="." unique_id=1041902904 instance=ExtResource("4_hlk0d")]
-position = Vector2(544, 0)
-
-[node name="Room4" parent="." unique_id=2146480380 instance=ExtResource("5_0uv0p")]
-position = Vector2(816, 0)
-
-[node name="Room5" parent="." unique_id=382746648 instance=ExtResource("6_b3faq")]
-position = Vector2(1168, 192)
-
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1414220173]
 stream = ExtResource("7_0uv0p")
-
-[node name="Player" parent="." unique_id=1804488356 instance=ExtResource("10_pdh0q")]
-position = Vector2(32, 48)
-metadata/_edit_group_ = true
