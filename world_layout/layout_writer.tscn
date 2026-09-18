@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://c20v2ipn7fiwd"]
 
-[ext_resource type="Script" uid="uid://cs011crf4x4jr" path="res://world_layout/layout_loader.gd" id="1_grwdm"]
 [ext_resource type="Texture2D" uid="uid://b8db3vu0vswg1" path="res://world_layout/world_layout_writer_tilemap.png" id="1_m1dok"]
 [ext_resource type="Script" uid="uid://uj3c5ym6f0yj" path="res://world_layout/layout_writer.gd" id="2_mt8ju"]
 
@@ -111,11 +110,9 @@ texture = ExtResource("1_m1dok")
 sources/0 = SubResource("TileSetAtlasSource_mt8ju")
 
 [node name="LayoutWriter" type="Node2D" unique_id=1600078385]
-script = ExtResource("1_grwdm")
+script = ExtResource("2_mt8ju")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1261335483]
 scale = Vector2(7.598, 7.598)
 tile_map_data = PackedByteArray("AAAEAAEAAAAAAAEAAAADAAEAAAAEAAAAAAACAAEAAAAEAAAAAAABAAEAAAAEAAAAAAAAAAEAAAADAAEAAAAAAAIAAAAIAAAAAAABAAAAAAAEAAAAAAACAAAAAAAEAAAAAAADAAAAAAAGAAEAAAADAP//AAAGAAAAAAAEAAAAAAACAAEAAAAAAAAAAAAEAAAAAAD//wAAAAAEAAAAAAD7/wAAAAAJAAAAAAD8/wAAAAAEAAAAAAD9/wAAAAAEAAAAAAD+/wAAAAAEAAAAAAA=")
 tile_set = SubResource("TileSet_bbxul")
-script = ExtResource("2_mt8ju")
-dbg = false

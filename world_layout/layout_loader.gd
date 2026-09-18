@@ -1,8 +1,5 @@
 extends Node
 
-## Tells the loader where to load the world from.
-@export var file_path : String = "res://assets/world_layout.lyt.txt"
-
 var space : Array[Array] = []
 var start : Vector2i
 
@@ -48,7 +45,7 @@ func locations_of(room_id: int) -> Array[Vector2i]:
 ## [b]NOTE:[/b] this is called by the layout manager after all rooms are registered, it should be the final thing
 ## to run before the invariants of the layout manager are considered valid.
 func read() -> void : 
-	var file = FileAccess.open(file_path, FileAccess.READ)
+	var file = FileAccess.open(LayoutWriter.file_path, FileAccess.READ)
 	var file_content : Array = Array(file.get_as_text().remove_chars("\r").split("\n",false))
 	var control = file_content.pop_front()
 	file.close()

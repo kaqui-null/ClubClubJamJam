@@ -1,22 +1,21 @@
 extends Node
 
-
 const VEC_MAPPED_TO_DIR := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 const LOAD_DEPTH: int = 3
-@onready var loader: Node = get_node("../Loader")
+@onready var Loader: Node = get_node("../Loader")
 
 
 var spawn_room_id: int = 8
 var is_room_loaded: Array[Array] = []
 
 func _ready() -> void:
-	loader.read()
-	is_room_loaded.resize(loader.space.size())
-	for row in range(loader.space[0].size()):
+	Loader.read()
+	is_room_loaded.resize(Loader.space.size())
+	for row in range(Loader.space[0].size()):
 		is_room_loaded.append(Array([], TYPE_BOOL, "", null)) # an Array constructor that technically might allow for the 2D array to be typed
 		is_room_loaded[row].fill(false)
 	
-	var loc: Array[Vector2i] = loader.locations_of(spawn_room_id)
+	var loc: Array[Vector2i] = Loader.locations_of(spawn_room_id)
 	print(loc)
 	# TODO : load first room
 
@@ -27,7 +26,7 @@ func on_room_exited(Source: Room, dir: Room.ExitDir) -> void:
 
 func recursive_room_load(Source: Room, source_exit_dir: Room.ExitDir, depth: int = LOAD_DEPTH) -> void:
 	var next_room_index: Vector2i = Source.INDEX + VEC_MAPPED_TO_DIR[source_exit_dir]
-	var next_room_id: Variant = loader.at(next_room_index)  
+	var next_room_id: Variant = Loader.at(next_room_index)  
 	var EnteredRoom: Room
 	
 	if next_room_id and not is_room_loaded[next_room_index.y][next_room_index.x]:

@@ -1,16 +1,20 @@
-extends TileMapLayer
+@tool
+class_name LayoutWriter
+extends Node2D
 
-@export var file_path : String = "res://assets/world_layout.lyt.txt"
+static var file_path : String = "res://world_layout/layout.txt"
 @export var start_room_idx : Vector2i
 @export var dbg : bool = !false
 
-func _ready() -> void :
-	var repr : Array = [[0]]
-	var start : Vector2i = Vector2i.ZERO
+@export_tool_button("Save Layout", "Save") var save_layout_action: Callable = save_layout
+
+func save_layout() -> void :
+	var repr: Array = [[0]]
+	var start: Vector2i = Vector2i.ZERO
 	var width: int = 1
 	var height: int = 1
 	
-	for idx : Vector2i in get_used_cells() :
+	for idx : Vector2i in $TileMapLayer.get_used_cells():
 		while idx.x < start.x :
 			start.x -= 1
 			width += 1
@@ -39,7 +43,7 @@ func _ready() -> void :
 			repr.push_back(array)
 			if dbg : print("push bottom")
 		
-		repr[idx.y-start.y][idx.x-start.x] = id_from_coords(get_cell_atlas_coords(idx))
+		repr[idx.y-start.y][idx.x-start.x] = id_from_coords($TileMapLayer.get_cell_atlas_coords(idx))
 		
 		if dbg : 
 			print(str(idx))
@@ -80,8 +84,12 @@ func file_write(repr: Array, start: Vector2i) -> void :
 	file.close()
 
 func id_from_coords(pos: Vector2i) -> int:
-	return sum(pos.x+pos.y)+pos.y
+	# temporary replacement
+	const ASSUMED_WIDTH := 160
+	return pos.y * ASSUMED_WIDTH + pos.x
+	#return sum(pos.x+pos.y)+pos.y
 
+# ATTENTION: Sam, if you don't give the variables and params below proper names I will steal all the US oil
 func sum(i: int) -> int :
 	var temp = 0
 	for j in range(0, i+1) :
