@@ -45,8 +45,6 @@ script = ExtResource("4_q1g3e")
 [node name="JumpState" type="Node" parent="StateMachine" unique_id=1205722053]
 script = ExtResource("5_smehm")
 
-[node name="AttackState" type="Node" parent="StateMachine" unique_id=522852411]
-
 [node name="ClimbState" type="Node" parent="StateMachine" unique_id=1076862175]
 script = ExtResource("6_ur7pv")
 
