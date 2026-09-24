@@ -9,6 +9,7 @@ signal got_parried(attacker)
 var health: float = 100
 
 @onready var machine_state_node: StateMachine = get_node("StateMachine")
+@onready var interaction_area: Area2D = get_node("InteractionArea")
 
 func _physics_process(delta: float) -> void:
 	movement(delta)
@@ -42,16 +43,14 @@ func arm_impulse_response(instantaneous_acceleration: Vector2) -> void:
 		impulse = body.mass * instantaneous_acceleration * 0.2
 		body.apply_impulse(impulse)
 
-# TODO: Create function to check if player can climb
-#func is_climbable() -> bool:
-	#for area: Area2D in $CollisionShape2D.get_overlapping_areas():
-		#if area.is_in_group("ladder"):
-			#return true
-	#
-	#return false
+func is_climbable() -> bool:
+	for area: Area2D in interaction_area.get_overlapping_areas():
+		if area.is_in_group("ladder"):
+			return true
+	
+	return false
 
 # TODO: Create a Parry function, preferably on ParryState
-
 func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
 	if get_current_state() == "ParryState":
 		#parry(entity_hurting)

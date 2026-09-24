@@ -26,6 +26,9 @@ radius = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4be5"]
 radius = 1.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfe6u"]
+size = Vector2(20, 12)
+
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
 script = ExtResource("1_wm45n")
 
@@ -142,3 +145,9 @@ position = Vector2(6, 2)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326918526]
 position_smoothing_enabled = true
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1584719529]
+
+[node name="InteractionShape" type="CollisionShape2D" parent="InteractionArea" unique_id=514030684]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_nfe6u")
