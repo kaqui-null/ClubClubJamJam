@@ -85,8 +85,8 @@ func file_write(repr: Array, start: Vector2i) -> void :
 
 func id_from_coords(pos: Vector2i) -> int:
 	# temporary replacement
-	const ASSUMED_WIDTH := 160
-	return pos.y * ASSUMED_WIDTH + pos.x
+	const WIDTH_IN_CELLS = 10
+	return pos.y * WIDTH_IN_CELLS + pos.x 
 	#return sum(pos.x+pos.y)+pos.y
 
 # ATTENTION: Sam, if you don't give the variables and params below proper names I will steal all the US oil

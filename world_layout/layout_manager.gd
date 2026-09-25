@@ -5,7 +5,7 @@ const LOAD_DEPTH: int = 3
 @onready var Loader: Node = get_node("../Loader")
 
 
-var spawn_room_id: int = 8
+var spawn_room_id: int = 9
 var is_room_loaded: Array[Array] = []
 
 func _ready() -> void:
@@ -15,9 +15,17 @@ func _ready() -> void:
 		is_room_loaded.append(Array([], TYPE_BOOL, "", null)) # an Array constructor that technically might allow for the 2D array to be typed
 		is_room_loaded[row].fill(false)
 	
-	var loc: Array[Vector2i] = Loader.locations_of(spawn_room_id)
-	print(loc)
-	# TODO : load first room
+	var spawn_room_index: Vector2i = Loader.locations_of(spawn_room_id)[0]
+	var SpawnRoom: Room = load("res://scenes/rooms/room" + str(spawn_room_id) + ".tscn").instantiate()
+	var player_scene: PackedScene = load("res://scenes/Player.tscn")
+	var Player: CharacterBody2D;
+	SpawnRoom.global_position = Vector2(0, 0)
+	SpawnRoom.setup(spawn_room_id, spawn_room_index)
+
+	get_tree().get_current_scene().add_child.call_deferred(SpawnRoom)
+	Player = SpawnRoom.spawn_player(player_scene)
+	get_tree().get_current_scene().add_child.call_deferred(Player)
+
 
 func on_room_exited(Source: Room, dir: Room.ExitDir) -> void:
 	recursive_room_load(Source, dir)
@@ -40,9 +48,9 @@ func recursive_room_unload(Source: Room, enter_dir: Room.ExitDir, original_room_
 	pass
 
 func load_room(id: int, index: Vector2i, dir_to_snap_to: Room.ExitDir, RoomToSnapTo: Room):
-	var RoomToLoad = load("res://scenes/rooms/room" + str(id) + ".tscn").instantiate()
+	var RoomToLoad: Room = load("res://scenes/rooms/room" + str(id) + ".tscn").instantiate()
+	
 	get_tree().get_current_scene().add_child(RoomToLoad)
 	RoomToSnapTo.connect_to_room(RoomToLoad, dir_to_snap_to)
-	RoomToLoad.ID = id
-	RoomToLoad.INDEX = index
+	RoomToLoad.setup(id, index)
 	is_room_loaded[index.y][index.x] = true
