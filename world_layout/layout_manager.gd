@@ -2,10 +2,12 @@ extends Node
 
 const VEC_MAPPED_TO_DIR := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
 const LOAD_DEPTH: int = 0
+const UNLOAD_DEPTH: int = 0
 @onready var Loader: Node = get_node("../Loader")
 
 
 var spawn_room_id: int = 9
+var load_allowed: bool = true
 var loaded_rooms: Array[Array] = []
 
 func _ready() -> void:
@@ -33,22 +35,34 @@ func once_after_ready(SpawnRoom: Room, Player: CharacterBody2D) -> void:
 	get_tree().get_current_scene().add_child(Player)
 	ExitDetection = Player.get_node("Area2D")
 	ExitDetection.body_shape_entered.connect(on_room_exited.unbind(2)) # unbind removes last two signal args (on_room_exited does not need them)
+	ExitDetection.body_shape_exited.connect(on_room_entered.unbind(4))
 
 func recursive_room_load(Source: Room, source_exit_dir: Room.ExitDir, depth: int = LOAD_DEPTH) -> void:
-	var EnteredRoom: Room;
-	var entered_room_index: Vector2i = Source.INDEX + VEC_MAPPED_TO_DIR[source_exit_dir]
-	var entered_room_id: Variant = Loader.at(entered_room_index)  
+	var index: Vector2i = Source.INDEX + VEC_MAPPED_TO_DIR[source_exit_dir]
+	var id: Variant = Loader.at(index)  
+	var EnteredRoom: Room = loaded_rooms[index.y][index.x]
 
-	if entered_room_id and not loaded_rooms[entered_room_index.y][entered_room_index.x]:
-		load_room(entered_room_id, entered_room_index, source_exit_dir, Source)
+	if id and not EnteredRoom:
+		load_room(id, index, source_exit_dir, Source)
 	if depth != 0:
-		EnteredRoom = loaded_rooms[entered_room_index.y][entered_room_index.x]
 		for exit: Room.ExitDir in Room.ExitDir.values():
 			if EnteredRoom.exit_exists[exit] and exit != Room.opposite(source_exit_dir):
 				recursive_room_load(EnteredRoom, exit, depth - 1)
 	
-func recursive_room_unload(Source: Room, enter_dir: Room.ExitDir, original_room_index: Vector2i, depth: int = LOAD_DEPTH):
-	pass
+func recursive_room_unload(Source: Room, source_exit_dir: Room.ExitDir, depth: int = UNLOAD_DEPTH, is_origin: bool = false) -> void:
+	var index: Vector2i = Source.INDEX if is_origin else Source.INDEX + VEC_MAPPED_TO_DIR[source_exit_dir]
+	var id: Variant = Loader.at(index)
+	var EnteredRoom: Room = loaded_rooms[index.y][index.x]
+	
+	if id and EnteredRoom:
+		for exit: Room.ExitDir in Room.ExitDir.values():
+			if EnteredRoom.exit_exists[exit] and exit != Room.opposite(source_exit_dir) and not is_origin:
+				recursive_room_unload(EnteredRoom, exit, depth - 1)
+			elif EnteredRoom.exit_exists[exit] and exit != source_exit_dir and is_origin:
+				recursive_room_unload(EnteredRoom, exit, depth - 1)
+		if depth < 0:
+			EnteredRoom.queue_free()
+			loaded_rooms[index.y][index.x] = null
 
 func load_room(id: int, index: Vector2i, dir_to_snap_to: Room.ExitDir, RoomToSnapTo: Room) -> void:
 	var scene_to_load: PackedScene = load("res://scenes/rooms/room" + str(id) + ".tscn")
@@ -69,4 +83,10 @@ func on_room_exited(tile_rid: RID, Exits: TileMapLayer) -> void:
 	var tile_index: Vector2i = Exits.get_coords_for_body_rid(tile_rid)
 	var exit_direction := Exits.get_cell_atlas_coords(tile_index).x #as Room.ExitDir
 
-	recursive_room_load(ExitedRoom, exit_direction)
+	if load_allowed == true:
+		load_allowed = false
+		recursive_room_load(ExitedRoom, exit_direction)
+		recursive_room_unload(ExitedRoom, exit_direction, UNLOAD_DEPTH, true)
+
+func on_room_entered() -> void:
+	load_allowed = true
