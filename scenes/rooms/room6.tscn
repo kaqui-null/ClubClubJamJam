@@ -43,7 +43,7 @@ tile_set = ExtResource("2_50mwn")
 collision_enabled = false
 
 [node name="Exits" type="TileMapLayer" parent="." unique_id=728713363]
-tile_map_data = PackedByteArray("AAAHAAUAAAACAAAAAAA=")
+tile_map_data = PackedByteArray("AAAJAAUAAAACAAAAAAA=")
 tile_set = SubResource("TileSet_qdqsw")
 collision_enabled = false
 navigation_enabled = false

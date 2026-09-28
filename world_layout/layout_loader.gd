@@ -8,6 +8,7 @@ func at(index: Vector2i) -> Variant:
 	if has(index): 
 		return space[index.y][index.x]
 	else: return null
+	# TODO: How about making 0 an integer null value? Isn't index 0 room already just a template anyway?
 
 ## Returns [code]true[/code] if there is a room present at specified [param index], returns [code]false[/code] otherwise
 func has(index: Vector2i) -> bool: 

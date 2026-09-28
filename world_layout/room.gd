@@ -16,7 +16,8 @@ signal room_exited(_Room: Room, dir: ExitDir)
 func setup(id: int, index: Vector2i) -> void:
 	ID = id
 	INDEX = index
-	$Exits.visible = false
+	$Exits.visible = true
+	$Exits.physics_quadrant_size = 1 # CAUTION: This is temporary cuz I forgot to set it before and dont want to set it individualy for each room yet
 	exits.resize(4)
 	exit_exists.resize(4)
 	update_exits()
@@ -38,16 +39,16 @@ func spawn_player(player_scene: PackedScene) -> CharacterBody2D:
 func connect_to_room(target: Room, opposing_dir: ExitDir) -> void:
 	var tilesize: int = $Exits.tile_set.tile_size.x 
 	var dir: ExitDir = opposite(opposing_dir)
-	var placement_location: Vector2 = target.global_position
+	var placement_location := Vector2i(target.global_position)
 	
 	assert(target.exit_exists[opposing_dir], 
 	"Attempted to place room at nonexistent exit.")
 	assert(exit_exists[dir],
 	"No compatible exit to connect to the room.")
-	placement_location += tilesize * (Vector2(target.exits[opposing_dir])
+	placement_location += tilesize * (target.exits[opposing_dir]
 						+ DIR_TO_VEC[opposing_dir] 
-						- Vector2(exits[dir]))
-	global_position = placement_location
+						- exits[dir])
+	global_position = Vector2(placement_location)
 
 func update_exits() -> void:
 	var atlas_index := Vector2i();
@@ -93,7 +94,7 @@ static func dir_name(dir: ExitDir) -> String:
 
 static func opposite(dir: ExitDir) -> ExitDir:
 	if dir > 1:
-		dir -= 2 as ExitDir
+		dir = (dir - 2) as ExitDir
 	else:
-		dir += 2 as ExitDir
+		dir = (dir + 2) as ExitDir
 	return dir
