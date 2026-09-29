@@ -1,18 +1,34 @@
 class_name Room
 extends Node2D
-
-var ID: int;
-var INDEX: Vector2i;
-var exits: Array[Vector2i];
-var exit_exists: Array[bool]; 
-var has_spawnpoint: bool;
-var spawn_location: Vector2i;
-const DIR_TO_VEC := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
-enum ExitDir {UP, RIGHT, DOWN, LEFT} # clockwise
+## Attached to every room, contains their behaviour and individual properties.
 
 signal room_exited(_Room: Room, dir: ExitDir)
 
+enum ExitDir {UP, RIGHT, DOWN, LEFT} # clockwise
 
+const DIR_TO_VEC := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
+
+# Don't touch any of these, they are automatically set when the room is loaded.
+var ID: int;
+var INDEX: Vector2i;
+var exits: Array[Vector2i];
+var exit_exists: Array[bool];  # since there is no value for Vector2i that could be considered invalid
+var has_spawnpoint: bool;
+var spawn_location: Vector2i;
+
+## Returns the direction's name as a string. [br]Example: [enum ExitDir].UP -> "UP"
+static func dir_name(dir: ExitDir) -> String:
+	return ExitDir.keys()[dir]
+
+## Returns the direction's opposing direction. [br]Example: [enum ExitDir].UP -> [enum ExitDir].DOWN
+static func opposite(dir: ExitDir) -> ExitDir:
+	if dir > 1:
+		dir = (dir - 2) as ExitDir
+	else:
+		dir = (dir + 2) as ExitDir
+	return dir
+
+## Detects and sets all the properties. [br]Gets called from [method "world_layout/layout_manager.gd".load_room].
 func setup(id: int, index: Vector2i) -> void:
 	ID = id
 	INDEX = index
@@ -23,6 +39,7 @@ func setup(id: int, index: Vector2i) -> void:
 	update_exits()
 	setup_spawn()
 
+## Instantiates and places the player at the spawn_location.
 func spawn_player(player_scene: PackedScene) -> CharacterBody2D:
 	var Player: CharacterBody2D = player_scene.instantiate()
 	var tilesize: int = $Exits.tile_set.tile_size.x 
@@ -36,6 +53,7 @@ func spawn_player(player_scene: PackedScene) -> CharacterBody2D:
 	
 	return Player
 
+## Moves [code]self[/code] such that it snaps to the opposing exit of the [param target].
 func connect_to_room(target: Room, opposing_dir: ExitDir) -> void:
 	var tilesize: int = $Exits.tile_set.tile_size.x 
 	var dir: ExitDir = opposite(opposing_dir)
@@ -50,6 +68,7 @@ func connect_to_room(target: Room, opposing_dir: ExitDir) -> void:
 						- exits[dir])
 	global_position = Vector2(placement_location)
 
+## Register the exit locations from the [code]$Exits[/code] to the [member exits] and their presence to [member exit_exists].
 func update_exits() -> void:
 	var atlas_index := Vector2i();
 	var cells: Array[Vector2i];
@@ -66,8 +85,8 @@ func update_exits() -> void:
 		else:
 			push_error("At room" + str(ID) + " -> Each direction can only have one exit.")
 			return
-	print_exits()
 
+## Registers the spawn location to [member spawn_location] and whether this room has one in [member has_spawnpoint].
 func setup_spawn() -> void:
 	var spawn_atlas_index := Vector2i(4, 0)
 	var spawn_cells: Array[Vector2i] = $Exits.get_used_cells_by_id(-1, spawn_atlas_index)
@@ -80,6 +99,7 @@ func setup_spawn() -> void:
 	else:
 		push_error("At room" + str(ID) + " -> More than one spawn per room is not allowed.")
 
+## Lists out the registered exit locations in [TileMapLayer] grid. Only for debugging.
 func print_exits() -> void:
 	print(" ")
 	for dir: int in ExitDir.values():
@@ -88,13 +108,3 @@ func print_exits() -> void:
 		else:
 			print(dir_name(dir) + " = " + "Absent")
 	print(" ")
-
-static func dir_name(dir: ExitDir) -> String:
-	return ExitDir.keys()[dir]
-
-static func opposite(dir: ExitDir) -> ExitDir:
-	if dir > 1:
-		dir = (dir - 2) as ExitDir
-	else:
-		dir = (dir + 2) as ExitDir
-	return dir

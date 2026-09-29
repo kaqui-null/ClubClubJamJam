@@ -13,6 +13,7 @@ script = ExtResource("1_ygioq")
 
 [node name="Manager" type="Node" parent="Layout" unique_id=1218807738]
 script = ExtResource("2_pdh0q")
+spawn_room_id = 9
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1414220173]
 stream = ExtResource("7_0uv0p")

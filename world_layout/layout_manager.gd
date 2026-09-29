@@ -1,14 +1,23 @@
 extends Node
 
+## Indexing this array with [enum Room.ExitDir] returns the direction the enum references.[br]
+## Example: [code]VEC_MAPPED_TO_DIR[ExitDir.RIGHT] = Vector2(1, 0)[/code]
 const VEC_MAPPED_TO_DIR := [Vector2i.UP, Vector2i.RIGHT, Vector2i.DOWN, Vector2i.LEFT]
-const LOAD_DEPTH: int = 0
-const UNLOAD_DEPTH: int = 0
-@onready var Loader: Node = get_node("../Loader")
+## How many "layers" of rooms to load in front of the loaded room. [br]
+## A 0 means just room you entered gets loaded. (somewhere between 3 and 5 works best i guess)
+const LOAD_DEPTH: int = 3
+## How for from the room you just left should the manager start unloading. [br]
+## A 0 means everything behind you except the room you just left is unloaded. [br][br]
+## [u]Leave this at -1 (to disable it), we're talking less than a MB per room in savings here. [/u]
+const UNLOAD_DEPTH: int = -1
 
+## Set this to the id of the room you want to load first.
+@export var spawn_room_id: int
 
-var spawn_room_id: int = 9
-var load_allowed: bool = true
+var load_allowed: bool = true # no, disabling this does not disable loading
 var loaded_rooms: Array[Array] = []
+
+@onready var Loader: Node = get_node("../Loader")
 
 func _ready() -> void:
 	Loader.read()
@@ -28,6 +37,7 @@ func _ready() -> void:
 	Player = SpawnRoom.spawn_player(player_scene)
 	once_after_ready.call_deferred(SpawnRoom, Player)
 
+## Exists because [method Node.add_child] can't be run in [method Node._ready].
 func once_after_ready(SpawnRoom: Room, Player: CharacterBody2D) -> void:
 	var ExitDetection: Area2D;
 	
@@ -40,15 +50,16 @@ func once_after_ready(SpawnRoom: Room, Player: CharacterBody2D) -> void:
 func recursive_room_load(Source: Room, source_exit_dir: Room.ExitDir, depth: int = LOAD_DEPTH) -> void:
 	var index: Vector2i = Source.INDEX + VEC_MAPPED_TO_DIR[source_exit_dir]
 	var id: Variant = Loader.at(index)  
-	var EnteredRoom: Room = loaded_rooms[index.y][index.x]
+	var EnteredRoom: Room;
 
-	if id and not EnteredRoom:
+	if id and not loaded_rooms[index.y][index.x]:
 		load_room(id, index, source_exit_dir, Source)
 	if depth != 0:
+		EnteredRoom = loaded_rooms[index.y][index.x]
 		for exit: Room.ExitDir in Room.ExitDir.values():
 			if EnteredRoom.exit_exists[exit] and exit != Room.opposite(source_exit_dir):
 				recursive_room_load(EnteredRoom, exit, depth - 1)
-	
+
 func recursive_room_unload(Source: Room, source_exit_dir: Room.ExitDir, depth: int = UNLOAD_DEPTH, is_origin: bool = false) -> void:
 	var index: Vector2i = Source.INDEX if is_origin else Source.INDEX + VEC_MAPPED_TO_DIR[source_exit_dir]
 	var id: Variant = Loader.at(index)
@@ -86,7 +97,9 @@ func on_room_exited(tile_rid: RID, Exits: TileMapLayer) -> void:
 	if load_allowed == true:
 		load_allowed = false
 		recursive_room_load(ExitedRoom, exit_direction)
-		recursive_room_unload(ExitedRoom, exit_direction, UNLOAD_DEPTH, true)
+		if UNLOAD_DEPTH != -1:
+			recursive_room_unload(ExitedRoom, exit_direction, UNLOAD_DEPTH, true)
 
+## This system prevents properly triggering [method on_room_exited] from the opposite exit if entering a room.
 func on_room_entered() -> void:
 	load_allowed = true
