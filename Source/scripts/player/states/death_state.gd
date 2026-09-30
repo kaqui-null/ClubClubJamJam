@@ -5,7 +5,11 @@ var animation_sprite: AnimatedSprite2D
 
 func enter() -> void:
 	# TODO: declare animation_sprite as the player's AnimatedSprite2D when ready
-	pass
+	
+	await animation_sprite.animation_finished
+	
+	# Intial screen restart, may change later
+	get_tree().reload_current_scene()
 
 func update(delta: float) -> void:
 	pass

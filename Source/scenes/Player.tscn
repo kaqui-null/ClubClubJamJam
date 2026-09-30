@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dbtyau0ebjqtn" path="res://Source/scripts/player/states/walk_state.gd" id="4_q1g3e"]
 [ext_resource type="Script" uid="uid://bydluuooorbip" path="res://Source/scripts/player/states/jump_state.gd" id="5_smehm"]
 [ext_resource type="Script" uid="uid://c6j8ut5mkpmcf" path="res://Source/scripts/player/states/climb_state.gd" id="6_ur7pv"]
+[ext_resource type="Script" uid="uid://dedvno0qacblx" path="res://Source/scripts/player/states/death_state.gd" id="7_6pt8s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
@@ -51,6 +52,7 @@ script = ExtResource("6_ur7pv")
 [node name="ParryState" type="Node" parent="StateMachine" unique_id=1680638784]
 
 [node name="DeathState" type="Node" parent="StateMachine" unique_id=1805239518]
+script = ExtResource("7_6pt8s")
 
 [node name="CangeState" type="Node" parent="StateMachine" unique_id=1391203487]
 
