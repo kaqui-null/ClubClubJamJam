@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal got_parried(attacker)
 
 @export var SPEED: float = 100.0
-@export var JUMP_SPEED: float = -400.0
+@export var JUMP_SPEED: float = -35.0
 @export var GRAV_ACC: float = (35 / 1.8) * 9.81 ## Normalized with player height in pixels to imitate real world g.
 
 var health: float = 100

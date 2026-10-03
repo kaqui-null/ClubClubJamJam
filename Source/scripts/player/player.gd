@@ -156,3 +156,14 @@ func get_cam() -> Camera2D :
 
 func change_animation(animation: String):
 	$AnimatedSprite2D.animation = animation
+
+## Make arm independent of the inputted [code]instantaneous_acceleration[/code]. [br][br]
+## This is to attempt to make the arm not react too much to player's movement
+## by applying an impulse that creates a similar change in velocity.
+func arm_impulse_response(instantaneous_acceleration: Vector2) -> void:
+	var arm: Array[RigidBody2D] = [$Arm/Elbow, $Arm/Wrist]
+	var impulse: Vector2;
+
+	for body in arm:
+		impulse = body.mass * instantaneous_acceleration * 0.2
+		body.apply_impulse(impulse)

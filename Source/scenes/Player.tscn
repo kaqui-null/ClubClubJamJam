@@ -10,6 +10,9 @@
 [ext_resource type="Script" uid="uid://bydluuooorbip" path="res://Source/scripts/player/states/jump_state.gd" id="5_smehm"]
 [ext_resource type="Script" uid="uid://c6j8ut5mkpmcf" path="res://Source/scripts/player/states/climb_state.gd" id="6_ur7pv"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvqwt"]
+size = Vector2(24, 35)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
 region = Rect2(0, 0, 24, 35)
@@ -28,6 +31,15 @@ radius = 1.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
 script = ExtResource("1_wm45n")
+SPEED = 75.0
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1813256001]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1321980360]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_yvqwt")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1774759063]
 script = ExtResource("2_6ljwu")
