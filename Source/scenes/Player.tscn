@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bmoqseq2p3r3n"]
 
-[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://Source/scripts/player/player_new.gd" id="1_wm45n"]
+[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://Source/scripts/player/player.gd" id="1_4axwf"]
 [ext_resource type="Script" uid="uid://ctarbou7y5sp3" path="res://Source/scripts/utils/state/state_machine.gd" id="2_6ljwu"]
 [ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://Source/assets/player/player-idle.png" id="2_u2pge"]
 [ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://Source/scripts/player/arm.gd" id="3_b288l"]
@@ -30,8 +30,7 @@ radius = 1.0
 radius = 1.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
-script = ExtResource("1_wm45n")
-SPEED = 75.0
+script = ExtResource("1_4axwf")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1813256001]
 collision_layer = 32
@@ -138,8 +137,8 @@ texture = ExtResource("4_b288l")
 
 [node name="Weapon" type="Sprite2D" parent="Arm/Wrist" unique_id=371824466]
 modulate = Color(1, 0, 0, 1)
-position = Vector2(0, -6)
-scale = Vector2(0.0075, 0.10906249)
+position = Vector2(-1.7881393e-07, -9.000001)
+scale = Vector2(0.0075, 0.20365489)
 texture = ExtResource("4_b288l")
 
 [node name="Sprite2D" type="Sprite2D" parent="Arm/Wrist" unique_id=109150661]
