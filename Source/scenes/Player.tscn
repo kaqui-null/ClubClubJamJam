@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bmoqseq2p3r3n"]
 
-[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://Source/scripts/player/player_new.gd" id="1_wm45n"]
+[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://Source/scripts/player/player_new.gd" id="1_4axwf"]
 [ext_resource type="Script" uid="uid://ctarbou7y5sp3" path="res://Source/scripts/utils/state/state_machine.gd" id="2_6ljwu"]
 [ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://Source/assets/player/player-idle.png" id="2_u2pge"]
 [ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://Source/scripts/player/arm.gd" id="3_b288l"]
@@ -10,6 +10,87 @@
 [ext_resource type="Script" uid="uid://bydluuooorbip" path="res://Source/scripts/player/states/jump_state.gd" id="5_smehm"]
 [ext_resource type="Script" uid="uid://c6j8ut5mkpmcf" path="res://Source/scripts/player/states/climb_state.gd" id="6_ur7pv"]
 [ext_resource type="Script" uid="uid://dedvno0qacblx" path="res://Source/scripts/player/states/death_state.gd" id="7_6pt8s"]
+[ext_resource type="Texture2D" uid="uid://bl2xs3t5pibqq" path="res://Assets/new_player/pngs/body-idle.png" id="8_kvels"]
+[ext_resource type="Texture2D" uid="uid://b868m01qjjiun" path="res://Assets/new_player/pngs/body-walk.png" id="9_hu4fo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvqwt"]
+size = Vector2(24, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0b11"]
+atlas = ExtResource("8_kvels")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr5l4"]
+atlas = ExtResource("8_kvels")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buo3n"]
+atlas = ExtResource("8_kvels")
+region = Rect2(72, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgb2o"]
+atlas = ExtResource("9_hu4fo")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svc0c"]
+atlas = ExtResource("9_hu4fo")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5eysr"]
+atlas = ExtResource("9_hu4fo")
+region = Rect2(72, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok4u2"]
+atlas = ExtResource("9_hu4fo")
+region = Rect2(108, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu3q7"]
+atlas = ExtResource("9_hu4fo")
+region = Rect2(144, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oo2u"]
+atlas = ExtResource("9_hu4fo")
+region = Rect2(180, 0, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sxyuo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0b11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr5l4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_buo3n")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgb2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svc0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5eysr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ok4u2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu3q7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oo2u")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
@@ -31,7 +112,15 @@ radius = 1.0
 size = Vector2(20, 12)
 
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
-script = ExtResource("1_wm45n")
+script = ExtResource("1_4axwf")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1813256001]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1321980360]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_yvqwt")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1774759063]
 script = ExtResource("2_6ljwu")
@@ -56,7 +145,13 @@ script = ExtResource("7_6pt8s")
 
 [node name="CangeState" type="Node" parent="StateMachine" unique_id=1391203487]
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1381230196]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_sxyuo")
+animation = &"idle"
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=209376474]
+visible = false
 position = Vector2(-12, -16)
 texture = SubResource("AtlasTexture_8kryg")
 centered = false
@@ -129,8 +224,8 @@ texture = ExtResource("4_b288l")
 
 [node name="Weapon" type="Sprite2D" parent="Arm/Wrist" unique_id=371824466]
 modulate = Color(1, 0, 0, 1)
-position = Vector2(0, -6)
-scale = Vector2(0.0075, 0.10906249)
+position = Vector2(-1.7881393e-07, -9.000001)
+scale = Vector2(0.0075, 0.20365489)
 texture = ExtResource("4_b288l")
 
 [node name="Sprite2D" type="Sprite2D" parent="Arm/Wrist" unique_id=109150661]

@@ -29,6 +29,16 @@ window/stretch/aspect="expand"
 
 project/assembly_name="ClubClubJamJam"
 
+[file_customization]
+
+folder_colors={
+"res://Source/assets/": "teal",
+"res://Source/scenes/": "purple",
+"res://Source/scripts/": "blue",
+"res://Source/tools/": "gray",
+"res://Source/world_layout/": "orange"
+}
+
 [global_group]
 
 enemy="damageable by player"
