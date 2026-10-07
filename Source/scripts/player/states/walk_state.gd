@@ -5,6 +5,7 @@ var direction: float
 var velocity: Vector2
 
 func enter() -> void:
+	target.change_animation("walk")
 	velocity = Vector2.ZERO
 
 func update(delta: float) -> void:
@@ -17,6 +18,7 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right")
 	
+	target.direction = direction
 	target.velocity.x = direction * target.SPEED
 	
 	target.move_and_slide()

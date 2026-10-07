@@ -4,7 +4,7 @@ extends State
 var direction: float
 
 func enter() -> void:
-	#target.change_animation("idle")
+	target.change_animation("idle")
 	pass
 
 func update(delta: float) -> void:

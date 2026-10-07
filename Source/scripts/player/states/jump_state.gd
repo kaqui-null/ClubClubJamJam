@@ -23,6 +23,8 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right")
 	
+	target.direction = direction
+	
 	# Gravity
 	if not target.is_on_floor():
 		velocity.y += target.GRAV_ACC * delta

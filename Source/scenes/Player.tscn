@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bmoqseq2p3r3n"]
 
-[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://Source/scripts/player/player_new.gd" id="1_4axwf"]
+[ext_resource type="Script" uid="uid://bhyuvfqxw1w8b" path="res://Source/scripts/player/player_new.gd" id="1_4axwf"]
 [ext_resource type="Script" uid="uid://ctarbou7y5sp3" path="res://Source/scripts/utils/state/state_machine.gd" id="2_6ljwu"]
 [ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://Source/assets/player/player-idle.png" id="2_u2pge"]
 [ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://Source/scripts/player/arm.gd" id="3_b288l"]
@@ -149,6 +149,7 @@ script = ExtResource("7_6pt8s")
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_sxyuo")
 animation = &"idle"
+autoplay = "idle"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=209376474]
 visible = false

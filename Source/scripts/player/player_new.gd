@@ -7,12 +7,21 @@ signal got_parried(attacker)
 @export var GRAV_ACC: float = (35 / 1.8) * 9.81 ## Normalized with player height in pixels to imitate real world g.
 
 var health: float = 100
+var direction: float = 0.0
 
 @onready var machine_state_node: StateMachine = get_node("StateMachine")
+@onready var animation_node: AnimatedSprite2D = get_node("AnimatedSprite2D")
 @onready var interaction_area: Area2D = get_node("InteractionArea")
 
 func _physics_process(delta: float) -> void:
-	movement(delta)
+	if direction != 0:
+		animation_node.flip_h = direction < 0
+
+func _process(delta: float) -> void:
+	if direction:
+		animation_node.speed_scale = 1
+	else:
+		animation_node.speed_scale = -1
 
 func movement(delta: float) -> void:
 	var old_velocity: Vector2 = velocity
@@ -55,8 +64,14 @@ func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
 	if get_current_state() == "ParryState":
 		#parry(entity_hurting)
 		pass
-
+		
 	else:
 		health -= damage_dealt
 		if health <= 0:
 			machine_state_node.change_state("DieState")
+
+func change_animation(animation: String) -> void:
+	if animation_node.sprite_frames.has_animation(animation):
+		animation_node.play(animation)
+	else:
+		printerr("Animation '" + animation + "' not found!")
