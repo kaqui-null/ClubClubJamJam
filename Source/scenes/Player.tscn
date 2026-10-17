@@ -98,44 +98,48 @@ scale = Vector2(0.15, 0.15)
 node_a = NodePath("../Shoulder")
 node_b = NodePath("../Elbow")
 bias = 0.9
-angular_limit_lower = 1.96175
+angular_limit_lower = 0.9669124
 angular_limit_upper = 3.1415927
 
 [node name="Elbow" type="RigidBody2D" parent="Arm" unique_id=1043242746]
-position = Vector2(6.0000005, 1)
+position = Vector2(5, 2.9999998)
+rotation = 0.5235988
 collision_layer = 0
 collision_mask = 0
-mass = 0.05
+mass = 0.08
+metadata/_edit_group_ = true
 
 [node name="UpperArmSprite" type="Sprite2D" parent="Arm/Elbow" unique_id=1512596993]
 modulate = Color(0.039215688, 1, 1, 1)
-position = Vector2(-3.00125, -0.9999999)
+position = Vector2(-2.9987504, 1.1920929e-07)
 scale = Vector2(6.0025, 1.9999999)
 texture = SubResource("PlaceholderTexture2D_4axwf")
 
 [node name="Sprite2D" type="Sprite2D" parent="Arm/Elbow" unique_id=1069465530]
-position = Vector2(0, -0.99999994)
+position = Vector2(0.0024995802, 0)
 scale = Vector2(0.015, 0.015)
 texture = ExtResource("4_b288l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Elbow" unique_id=237533972]
-position = Vector2(0, -1)
+position = Vector2(-4.7683716e-07, 0)
 shape = SubResource("CircleShape2D_yakf4")
 
 [node name="ForeArm" type="PinJoint2D" parent="Arm" unique_id=1544666301]
-position = Vector2(6.0000005, 0)
+position = Vector2(5, 3)
 scale = Vector2(0.15, 0.15)
 node_a = NodePath("../Elbow")
 node_b = NodePath("../Wrist")
 bias = 0.9
-angular_limit_lower = 2.1380284
-angular_limit_upper = 1.6406095
+angular_limit_enabled = true
+angular_limit_lower = -2.6179938
+angular_limit_upper = -0.08726646
 
 [node name="Wrist" type="RigidBody2D" parent="Arm" unique_id=19235455]
-position = Vector2(14, 0)
+position = Vector2(13, 3)
 collision_layer = 0
 collision_mask = 0
 mass = 0.05
+metadata/_edit_group_ = true
 
 [node name="ForeArmSprite" type="Sprite2D" parent="Arm/Wrist" unique_id=2075686294]
 modulate = Color(1, 0, 1, 1)
@@ -157,7 +161,7 @@ texture = ExtResource("4_b288l")
 shape = SubResource("CircleShape2D_v4be5")
 
 [node name="PassiveAttractor" type="Node2D" parent="Arm" unique_id=429689486]
-position = Vector2(11, 3)
+position = Vector2(3, 14)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326918526]
 position = Vector2(-1, -6)
