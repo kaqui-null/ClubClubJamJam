@@ -1,4 +1,4 @@
-class_name EnemyResource
+class_name EnemyValues
 extends Resource
 
 @export var health = 100.0
