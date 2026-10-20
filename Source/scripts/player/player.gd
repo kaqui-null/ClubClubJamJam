@@ -21,26 +21,15 @@ func movement(delta: float) -> void:
 		velocity += Vector2.DOWN * GRAV_ACC * delta
 	if direction:
 		velocity.x = direction * SPEED
-		arm_impulse_response(velocity)
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	$Arm.impulse_sync(velocity)
 	move_and_slide()
 
 func get_current_state() -> String:
 	machine_state_node = get_node("StateMachine")
 	return machine_state_node.current_state.name
-
-## Make arm independent of the inputted [code]instantaneous_acceleration[/code]. [br][br]
-## This is to attempt to make the arm not react too much to player's movement 
-## by applying an impulse that creates a similar change in velocity.
-func arm_impulse_response(instantaneous_acceleration: Vector2) -> void:
-	var arm: Array[RigidBody2D] = [$Arm/Elbow, $Arm/Wrist]
-	var impulse: Vector2;
-	
-	for body in arm:
-		impulse = body.mass * instantaneous_acceleration * 0.2
-		body.apply_impulse(impulse)
 
 # TODO: Create function to check if player can climb
 #func is_climbable() -> bool:
