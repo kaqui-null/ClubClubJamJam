@@ -43,6 +43,7 @@ folder_colors={
 
 enemy="damageable by player"
 ladder=""
+aqo=""
 
 [input]
 
