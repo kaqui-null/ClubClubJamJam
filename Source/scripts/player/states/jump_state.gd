@@ -33,6 +33,10 @@ func physics_update(delta: float) -> void:
 	if direction:
 		velocity.x = direction * target.SPEED
 	
+	# Jump velocity control
+	if not Input.is_action_pressed("Jump") and velocity.y < 0:
+		velocity.y = 0
+
 	target.velocity = velocity
 	target.move_and_slide()
 
