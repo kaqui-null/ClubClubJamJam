@@ -12,7 +12,7 @@ func update(delta: float) -> void:
 	if direction == 0:
 		machine.change_state("IdleState")
 	
-	if Input.is_action_just_pressed("Jump"):
+	if Input.is_action_just_pressed("Jump") or not target.is_on_floor():
 		machine.change_state("JumpState")
 
 func physics_update(delta: float) -> void:
