@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bmoqseq2p3r3n"]
 
-[ext_resource type="Script" uid="uid://bhyuvfqxw1w8b" path="res://Source/scripts/player/player_new.gd" id="1_4axwf"]
+[ext_resource type="Script" uid="uid://tllgfleplwku" path="res://Source/scripts/player/player.gd" id="1_4axwf"]
 [ext_resource type="Script" uid="uid://ctarbou7y5sp3" path="res://Source/scripts/utils/state/state_machine.gd" id="2_6ljwu"]
 [ext_resource type="Texture2D" uid="uid://cgbgagsh2ty51" path="res://Source/assets/player/player-idle.png" id="2_u2pge"]
 [ext_resource type="Script" uid="uid://dqq2r1f50j7dg" path="res://Source/scripts/player/arm.gd" id="3_b288l"]
@@ -9,94 +9,12 @@
 [ext_resource type="Script" uid="uid://dbtyau0ebjqtn" path="res://Source/scripts/player/states/walk_state.gd" id="4_q1g3e"]
 [ext_resource type="Script" uid="uid://bydluuooorbip" path="res://Source/scripts/player/states/jump_state.gd" id="5_smehm"]
 [ext_resource type="Script" uid="uid://c6j8ut5mkpmcf" path="res://Source/scripts/player/states/climb_state.gd" id="6_ur7pv"]
-<<<<<<< HEAD
-[ext_resource type="Script" uid="uid://dedvno0qacblx" path="res://Source/scripts/player/states/death_state.gd" id="7_6pt8s"]
-[ext_resource type="Texture2D" uid="uid://bl2xs3t5pibqq" path="res://Assets/new_player/pngs/body-idle.png" id="8_kvels"]
-[ext_resource type="Texture2D" uid="uid://b868m01qjjiun" path="res://Assets/new_player/pngs/body-walk.png" id="9_hu4fo"]
-=======
 [ext_resource type="Script" uid="uid://bv2bc4lt5v7hu" path="res://addons/godot-rapier2d/custom_nodes/rapier_pin_joint_2d.gd" id="10_6pt8s"]
 [ext_resource type="Script" uid="uid://unwhnooi7g2c" path="res://addons/godot-rapier2d/custom_nodes/rapier_rigid_body_2d.gd" id="10_lwibj"]
 [ext_resource type="Texture2D" uid="uid://m6bu8p8db23a" path="res://Assets/new_player/pngs/pipe-idle.png" id="12_kvels"]
->>>>>>> 4b897732962e99eeb9f3f2129c561533f07e3e2f
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvqwt"]
 size = Vector2(24, 35)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0b11"]
-atlas = ExtResource("8_kvels")
-region = Rect2(0, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vr5l4"]
-atlas = ExtResource("8_kvels")
-region = Rect2(36, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_buo3n"]
-atlas = ExtResource("8_kvels")
-region = Rect2(72, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cgb2o"]
-atlas = ExtResource("9_hu4fo")
-region = Rect2(0, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_svc0c"]
-atlas = ExtResource("9_hu4fo")
-region = Rect2(36, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5eysr"]
-atlas = ExtResource("9_hu4fo")
-region = Rect2(72, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ok4u2"]
-atlas = ExtResource("9_hu4fo")
-region = Rect2(108, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yu3q7"]
-atlas = ExtResource("9_hu4fo")
-region = Rect2(144, 0, 36, 36)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0oo2u"]
-atlas = ExtResource("9_hu4fo")
-region = Rect2(180, 0, 36, 36)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_sxyuo"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j0b11")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vr5l4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_buo3n")
-}],
-"loop": 1,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cgb2o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_svc0c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5eysr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ok4u2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yu3q7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0oo2u")
-}],
-"loop": 1,
-"name": &"walk",
-"speed": 5.0
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8kryg"]
 atlas = ExtResource("2_u2pge")
@@ -118,13 +36,8 @@ radius = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4be5"]
 radius = 1.0
 
-<<<<<<< HEAD
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfe6u"]
-size = Vector2(20, 12)
-=======
 [sub_resource type="CircleShape2D" id="CircleShape2D_4axwf"]
 radius = 1.0
->>>>>>> 4b897732962e99eeb9f3f2129c561533f07e3e2f
 
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
 script = ExtResource("1_4axwf")
@@ -152,24 +65,18 @@ script = ExtResource("4_q1g3e")
 [node name="JumpState" type="Node" parent="StateMachine" unique_id=1205722053]
 script = ExtResource("5_smehm")
 
+[node name="AttackState" type="Node" parent="StateMachine" unique_id=522852411]
+
 [node name="ClimbState" type="Node" parent="StateMachine" unique_id=1076862175]
 script = ExtResource("6_ur7pv")
 
 [node name="ParryState" type="Node" parent="StateMachine" unique_id=1680638784]
 
 [node name="DeathState" type="Node" parent="StateMachine" unique_id=1805239518]
-script = ExtResource("7_6pt8s")
 
 [node name="CangeState" type="Node" parent="StateMachine" unique_id=1391203487]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1381230196]
-position = Vector2(0, 1)
-sprite_frames = SubResource("SpriteFrames_sxyuo")
-animation = &"idle"
-autoplay = "idle"
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=209376474]
-visible = false
 position = Vector2(-12, -16)
 texture = SubResource("AtlasTexture_8kryg")
 centered = false
@@ -298,9 +205,3 @@ texture = ExtResource("12_kvels")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326918526]
 position = Vector2(-1, -6)
 position_smoothing_enabled = true
-
-[node name="InteractionArea" type="Area2D" parent="." unique_id=1584719529]
-
-[node name="InteractionShape" type="CollisionShape2D" parent="InteractionArea" unique_id=514030684]
-position = Vector2(0, -5)
-shape = SubResource("RectangleShape2D_nfe6u")

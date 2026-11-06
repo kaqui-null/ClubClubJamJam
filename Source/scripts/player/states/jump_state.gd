@@ -23,6 +23,7 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right")
 	
+	print(target.name)
 	target.direction = direction
 	
 	# Gravity
