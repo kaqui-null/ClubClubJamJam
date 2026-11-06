@@ -5,6 +5,7 @@ extends Node2D
 @export var Ki: float = 50
 @export var Kd: float = 1.5
 @export var Kdamp: float = -1
+@export var Kt: float = -200
 
 @onready var Wrist: RigidBody2D = $Wrist
 @onready var Elbow: RigidBody2D = $Elbow
@@ -23,12 +24,15 @@ func _physics_process(delta: float) -> void:
 		proportional_force(Wrist, mouse_pos)
 		integral = integral_force(Wrist, integral, mouse_pos, delta)
 		previous_error = derivative_force(Wrist, previous_error, mouse_pos, delta)
+		$Weapon.apply_torque(Kt)
 	else:
+		
 		integral = Vector2.ZERO
 		previous_error = Vector2.ZERO
 		constant_force(Wrist, PassiveAttractor.position)
 		damp_force(Wrist)
 		damp_force(Elbow,0.5)
+		$Weapon.apply_torque(2*Kt)
 
 #region Force Types
 func derivative_force(body: RigidBody2D, prev_error: Vector2, target: Vector2, delta: float, additional_multiplier: float = 1) -> Vector2:
@@ -52,6 +56,7 @@ func constant_force(body: RigidBody2D, target: Vector2, additional_multiplier: f
 
 func damp_force(body: RigidBody2D, additional_multiplier: float = 1) -> void:
 	body.apply_central_force(body.linear_velocity * Kdamp * additional_multiplier)
+
 #endregion
 
 ## Normal impulse concepts dont work here and the closest effect to what I want comes from jumbling numbers around randomly xd

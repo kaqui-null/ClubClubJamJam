@@ -9,9 +9,15 @@
 [ext_resource type="Script" uid="uid://dbtyau0ebjqtn" path="res://Source/scripts/player/states/walk_state.gd" id="4_q1g3e"]
 [ext_resource type="Script" uid="uid://bydluuooorbip" path="res://Source/scripts/player/states/jump_state.gd" id="5_smehm"]
 [ext_resource type="Script" uid="uid://c6j8ut5mkpmcf" path="res://Source/scripts/player/states/climb_state.gd" id="6_ur7pv"]
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://dedvno0qacblx" path="res://Source/scripts/player/states/death_state.gd" id="7_6pt8s"]
 [ext_resource type="Texture2D" uid="uid://bl2xs3t5pibqq" path="res://Assets/new_player/pngs/body-idle.png" id="8_kvels"]
 [ext_resource type="Texture2D" uid="uid://b868m01qjjiun" path="res://Assets/new_player/pngs/body-walk.png" id="9_hu4fo"]
+=======
+[ext_resource type="Script" uid="uid://bv2bc4lt5v7hu" path="res://addons/godot-rapier2d/custom_nodes/rapier_pin_joint_2d.gd" id="10_6pt8s"]
+[ext_resource type="Script" uid="uid://unwhnooi7g2c" path="res://addons/godot-rapier2d/custom_nodes/rapier_rigid_body_2d.gd" id="10_lwibj"]
+[ext_resource type="Texture2D" uid="uid://m6bu8p8db23a" path="res://Assets/new_player/pngs/pipe-idle.png" id="12_kvels"]
+>>>>>>> 4b897732962e99eeb9f3f2129c561533f07e3e2f
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yvqwt"]
 size = Vector2(24, 35)
@@ -112,8 +118,13 @@ radius = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4be5"]
 radius = 1.0
 
+<<<<<<< HEAD
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfe6u"]
 size = Vector2(20, 12)
+=======
+[sub_resource type="CircleShape2D" id="CircleShape2D_4axwf"]
+radius = 1.0
+>>>>>>> 4b897732962e99eeb9f3f2129c561533f07e3e2f
 
 [node name="Player" type="CharacterBody2D" unique_id=1804488356]
 script = ExtResource("1_4axwf")
@@ -180,7 +191,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Shoulder" unique_id=896278910]
 shape = SubResource("CircleShape2D_8kryg")
 
-[node name="UpperArm" type="PinJoint2D" parent="Arm" unique_id=1550994698]
+[node name="UpperArm" type="PinJoint2D" parent="Arm" unique_id=1173308740]
 position = Vector2(0, -4.7683716e-07)
 scale = Vector2(0.15, 0.15)
 node_a = NodePath("../Shoulder")
@@ -188,13 +199,17 @@ node_b = NodePath("../Elbow")
 bias = 0.9
 angular_limit_lower = 0.9669124
 angular_limit_upper = 3.1415927
+script = ExtResource("10_6pt8s")
+metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
 
-[node name="Elbow" type="RigidBody2D" parent="Arm" unique_id=1043242746]
+[node name="Elbow" type="RigidBody2D" parent="Arm" unique_id=105952053]
 position = Vector2(5, 2.9999998)
 rotation = 0.5235988
 collision_layer = 0
 collision_mask = 0
 mass = 0.08
+script = ExtResource("10_lwibj")
+metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
 [node name="UpperArmSprite" type="Sprite2D" parent="Arm/Elbow" unique_id=1512596993]
@@ -212,7 +227,7 @@ texture = ExtResource("4_b288l")
 position = Vector2(-4.7683716e-07, 0)
 shape = SubResource("CircleShape2D_yakf4")
 
-[node name="ForeArm" type="PinJoint2D" parent="Arm" unique_id=1544666301]
+[node name="ForeArm" type="PinJoint2D" parent="Arm" unique_id=1196338637]
 position = Vector2(5, 3)
 scale = Vector2(0.15, 0.15)
 node_a = NodePath("../Elbow")
@@ -221,12 +236,18 @@ bias = 0.9
 angular_limit_enabled = true
 angular_limit_lower = -2.6179938
 angular_limit_upper = -0.08726646
+script = ExtResource("10_6pt8s")
+ik_damping = 0.0
+metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
 
-[node name="Wrist" type="RigidBody2D" parent="Arm" unique_id=19235455]
+[node name="Wrist" type="RigidBody2D" parent="Arm" unique_id=2082543198]
 position = Vector2(13, 3)
 collision_layer = 0
 collision_mask = 0
 mass = 0.05
+script = ExtResource("10_lwibj")
+additional_solver_iterations = 15
+metadata/_custom_type_script = "uid://unwhnooi7g2c"
 metadata/_edit_group_ = true
 
 [node name="ForeArmSprite" type="Sprite2D" parent="Arm/Wrist" unique_id=2075686294]
@@ -234,12 +255,6 @@ modulate = Color(1, 0, 1, 1)
 position = Vector2(-4, 1.1920929e-07)
 scale = Vector2(7.9999995, 2.0000002)
 texture = SubResource("PlaceholderTexture2D_6pt8s")
-
-[node name="Weapon" type="Sprite2D" parent="Arm/Wrist" unique_id=371824466]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(-1.7881393e-07, -9.000001)
-scale = Vector2(0.0075, 0.20365489)
-texture = ExtResource("4_b288l")
 
 [node name="Sprite2D" type="Sprite2D" parent="Arm/Wrist" unique_id=109150661]
 scale = Vector2(0.015, 0.015)
@@ -249,7 +264,36 @@ texture = ExtResource("4_b288l")
 shape = SubResource("CircleShape2D_v4be5")
 
 [node name="PassiveAttractor" type="Node2D" parent="Arm" unique_id=429689486]
-position = Vector2(3, 14)
+position = Vector2(5, 14)
+
+[node name="Grip" type="PinJoint2D" parent="Arm" unique_id=2090267224 node_paths=PackedStringArray("ik_target")]
+position = Vector2(13, 3)
+scale = Vector2(0.15, 0.15)
+node_a = NodePath("../Wrist")
+node_b = NodePath("../Weapon")
+bias = 0.9
+angular_limit_enabled = true
+angular_limit_upper = 1.5707964
+script = ExtResource("10_6pt8s")
+ik_target = NodePath("../PassiveAttractor")
+metadata/_custom_type_script = "uid://bv2bc4lt5v7hu"
+
+[node name="Weapon" type="RigidBody2D" parent="Arm" unique_id=2070817008]
+position = Vector2(13, -18)
+collision_layer = 64
+collision_mask = 64
+mass = 0.004
+script = ExtResource("10_lwibj")
+additional_solver_iterations = 5
+metadata/_custom_type_script = "uid://unwhnooi7g2c"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Arm/Weapon" unique_id=662937322]
+shape = SubResource("CircleShape2D_4axwf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Arm/Weapon" unique_id=1419297403]
+position = Vector2(-7, 11)
+rotation = -1.5707964
+texture = ExtResource("12_kvels")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=326918526]
 position = Vector2(-1, -6)
