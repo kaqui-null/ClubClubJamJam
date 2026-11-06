@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c7kju3b4q8pp0"]
 
-[ext_resource type="Script" uid="uid://bli6ldttqdf02" path="res://Source/scripts/enemies/crab_ai.gd" id="1_0s1mp"]
+[ext_resource type="Script" uid="uid://bli6ldttqdf02" path="res://Source/scripts/enemies/crab_ai/crab_ai.gd" id="1_0s1mp"]
 [ext_resource type="Texture2D" uid="uid://ci5ahfudv2w87" path="res://Source/assets/crab/crab_stomp.png" id="2_jgbqf"]
 [ext_resource type="Texture2D" uid="uid://bhit2jogn8bm8" path="res://Source/assets/crab/crab_death.png" id="3_0mleb"]
 [ext_resource type="Texture2D" uid="uid://p0slftg4ppxy" path="res://Source/assets/crab/crab_idle.png" id="4_qokaa"]
