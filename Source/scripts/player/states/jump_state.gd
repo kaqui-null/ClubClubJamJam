@@ -23,6 +23,9 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	direction = Input.get_axis("Left", "Right")
 	
+	print(target.name)
+	target.direction = direction
+	
 	# Gravity
 	if not target.is_on_floor():
 		velocity.y += target.GRAV_ACC * delta
@@ -31,6 +34,10 @@ func physics_update(delta: float) -> void:
 	if direction:
 		velocity.x = direction * target.SPEED
 	
+	# Jump velocity control
+	if not Input.is_action_pressed("Jump") and velocity.y < 0:
+		velocity.y = 0
+
 	target.velocity = velocity
 	target.move_and_slide()
 
