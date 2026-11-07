@@ -56,6 +56,7 @@ func hurt(entity_hurting: Node2D, damage_dealt: float) -> void:
 
 func change_animation(animation: String) -> void:
 	if animation_node == null:
+		printerr("No animation Node found!")
 		return
 	
 	if animation_node.sprite_frames.has_animation(animation):
