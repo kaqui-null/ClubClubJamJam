@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://pifrhpmbnp7h"]
+
+[ext_resource type="PackedScene" uid="uid://cbwq30mumectu" path="res://Source/scenes/enemies/enemy_spawner/enemy_spawner.tscn" id="1_whad4"]
+
+[node name="WavesBoss" type="Node2D" unique_id=869816112]
+
+[node name="CenterEnemySpawner" parent="." unique_id=47148587 instance=ExtResource("1_whad4")]
+spawn_on_start = false
+disappears_on_spawns = false
+reduce_waves_count = false
+
+[node name="RightEnemySpawner" parent="." unique_id=2039486209 instance=ExtResource("1_whad4")]
+position = Vector2(20, 0)
+
+[node name="LeftEnemySpawner" parent="." unique_id=851053894 instance=ExtResource("1_whad4")]
+position = Vector2(-20, 0)
