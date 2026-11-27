@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b4glw22ii1hvd"]
+
+[ext_resource type="PackedScene" uid="uid://bmoqseq2p3r3n" path="res://Source/scenes/Player.tscn" id="1_ywnw3"]
+[ext_resource type="Texture2D" uid="uid://cea0mvn0uwsh0" path="res://Source/icon.svg" id="2_fgrip"]
+[ext_resource type="Script" uid="uid://ike4cpv57itq" path="res://Source/scripts/utils/triggers/dialog_trigger.gd" id="3_glvb6"]
+[ext_resource type="Resource" uid="uid://lhjjqucutvds" path="res://Source/scripts/ui/dialog/dialog_resources/test_dialog.tres" id="4_c4tk8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfe6u"]
+size = Vector2(271, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4htj"]
+size = Vector2(127.99983, 121.26318)
+
+[node name="DialogTesting" type="Node2D" unique_id=247869472]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1135249976]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1348326793]
+position = Vector2(120.5, 150.5)
+shape = SubResource("RectangleShape2D_nfe6u")
+
+[node name="Player" parent="StaticBody2D" unique_id=1804488356 instance=ExtResource("1_ywnw3")]
+position = Vector2(87, 53)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2086527121]
+position = Vector2(171.99998, 92)
+scale = Vector2(0.17187499, 0.1484375)
+texture = ExtResource("2_fgrip")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1139680629]
+script = ExtResource("3_glvb6")
+dialog_resource = ExtResource("4_c4tk8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=944072623]
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_r4htj")
